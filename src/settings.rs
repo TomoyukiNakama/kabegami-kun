@@ -382,7 +382,17 @@ impl SettingsView {
     }
 
     /// 壁紙の自動更新。スイッチを入れると systemd のユーザータイマーを作り、切ると消す。
-    fn render_auto(&self, p: Palette, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render_auto(&self, p: Palette, cx: &mut Context<Self>) -> AnyElement {
+        // snap 版では systemd のタイマーを作れないので、使えないことだけを伝える
+        if crate::schedule::unavailable_in_snap() {
+            return Self::field(
+                tr!("auto.switch"),
+                tr!("auto.desc"),
+                div().text_sm().line_height(px(20.)).text_color(p.slate).child(tr!("auto.snap_unavailable")),
+                p,
+            )
+            .into_any_element();
+        }
         let dashboard = self.dashboard.read(cx);
         let auto = dashboard.config.auto.clone();
         let error = dashboard.auto_error.clone();
@@ -446,6 +456,7 @@ impl SettingsView {
                     )
                 })
             })
+            .into_any_element()
     }
 
     fn render_storage(&self, p: Palette, cx: &mut Context<Self>) -> impl IntoElement {

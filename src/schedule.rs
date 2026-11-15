@@ -17,6 +17,11 @@ const UNIT: &str = "kabegami-kun";
 /// 名前を変える前（bing-wallpaper-manager）のタイマー。
 const LEGACY_UNIT: &str = "bing-wallpaper-manager";
 
+/// snap（strict）として動いているか。snap の中からは systemd のユーザータイマーを作れないので、自動更新を出さない。
+pub fn unavailable_in_snap() -> bool {
+    std::env::var_os("SNAP").is_some()
+}
+
 fn unit_dir() -> PathBuf {
     dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("systemd").join("user")
 }
@@ -105,6 +110,9 @@ pub fn apply(auto: &AutoUpdate, market: &str) -> Result<()> {
 
 /// 以前の名前のタイマーが残っていたら止めて消し、今の名前で作り直す（二重に動かさないため）。
 pub fn migrate_legacy(auto: &AutoUpdate, market: &str) -> Result<()> {
+    if unavailable_in_snap() {
+        return Ok(());
+    }
     let dir = unit_dir();
     let timer = dir.join(format!("{LEGACY_UNIT}.timer"));
     let service = dir.join(format!("{LEGACY_UNIT}.service"));
