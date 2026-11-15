@@ -126,7 +126,11 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
   「rustup が無い」と誤って判断する）。そのため `plugin: nil` で、cargo の部分だけ LD_LIBRARY_PATH を外したサブシェルで実行している。
 - snap 版の設定は `~/snap/kabegami-kun/current/.config/kabegami-kun/` に置かれる（以前の設定は引き継がない）。
   保存先は実際の `~/ピクチャ` を指す（GNOME 拡張が user-dirs.dirs を写す）。
-- snap の中からは systemd のユーザータイマーを作れないので、snap 版では自動更新を出さず、使えないことを表示する（`schedule::unavailable_in_snap`。環境変数 `SNAP` で判定）。
+- snap の中からは systemd のユーザータイマーを作れない（ユーザーごとのサービス `daemon-scope: user` も snapd の実験的な機能で、既定では入らない）。
+  snap 版の自動更新は、snapd の autostart で動かす: スイッチを入れると `~/snap/kabegami-kun/current/.config/autostart/kabegami-kun-background.desktop`
+  を置いて裏方（`--background`、`src/background.rs`）をすぐに起動し、次回からはログイン時に snapd が起動する（snapcraft.yaml の `background` アプリ）。
+  裏方は 1 分ごとに設定を読み直し、間隔がたったら `--apply` と同じ処理をする。自動更新が切られたら終わる。ロックファイルで 1 つに絞る。
+  snap かどうかは `schedule::in_snap`（環境変数 `SNAP`）で判定する。手元では `SNAP=/snap/kabegami-kun/test` を付けて撮影すると snap 版の動作になる。
 - Snap Store では `kabegami-kun` として公開している（https://snapcraft.io/kabegami-kun 、公開者は作者のアカウント）。
   出すときは `snapcraft upload --release=edge <snap>` で edge に出し、作者が `sudo snap refresh kabegami-kun --edge` で
   動作を確かめてから `snapcraft release kabegami-kun <revision> stable` で stable に出す。ログイン（`snapcraft login`）は作者が端末で行う。

@@ -6,6 +6,7 @@ mod info;
 rust_i18n::i18n!("locales", fallback = "en");
 
 mod archive;
+mod background;
 mod bing;
 mod colors;
 mod config;
@@ -2925,6 +2926,11 @@ fn main() {
         );
         return;
     }
+    // snap 版の自動更新（ログイン時に自動で起動する裏方）
+    if args.iter().any(|a| a == "--background") {
+        background::run();
+        return;
+    }
     if args.iter().any(|a| a == "--apply") {
         if let Err(err) = run_cli(&args) {
             eprintln!("{}: {err:#}", tr!("cli.error"));
@@ -2936,6 +2942,10 @@ fn main() {
     // 以前の名前の自動更新のタイマーが残っていたら、今の名前で作り直す
     if let Err(err) = schedule::migrate_legacy(&config.auto, &config.auto_market()) {
         eprintln!("{err:#}");
+    }
+    // snap 版: 自動更新を入れたまま、まだ裏方が動いていない（入れた直後で、ログインし直していない）ときに起動する
+    if schedule::in_snap() && config.auto.enabled {
+        schedule::start_background();
     }
 
     // すでに起動していたら、そのウィンドウを前に出してもらって終了する

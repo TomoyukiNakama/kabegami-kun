@@ -27,7 +27,7 @@ The photo you pick fills the top of a rounded, frameless window. Hover over it t
 - **Photo actions**: right-click a photo or use the *…* button on the large photo to set it as the wallpaper, add it to your favorites, see its info, look it up on Bing, copy its title and location, open the image, show it in its folder, or delete it
 - **Go to month**: jump straight to a month of the earlier photos
 - **Delete** (Delete key): removes a photo from the folder after a confirmation; deleted photos are not downloaded again
-- **Automatic updates**: a switch in the settings changes the wallpaper for you even when the app is closed — to each new photo of the day, or to a different favorite or saved photo at an interval you pick (not in the Snap version)
+- **Automatic updates**: a switch in the settings changes the wallpaper for you even when the app is closed — to each new photo of the day, or to a different favorite or saved photo at an interval you pick
 - **Settings** (☰ at the top right, Ctrl+,): General (language, theme, how older photos load), Regions, Wallpaper (fit), Automatic updates, Storage (folder and disk usage), and About (version, license, libraries used)
 - **11 languages**: Japanese, English, Chinese (Simplified / Traditional), Korean, German, French, Spanish, Italian, Portuguese and Russian. *Automatic* follows the OS language (`LANG`). Photo titles and descriptions prefer the version shown in a region that uses the selected language
 - **Theme**: match the system, light or dark
@@ -149,7 +149,7 @@ Search for *Kabegami-kun* in the App Center ([Snap Store page](https://snapcraft
 sudo snap install kabegami-kun
 ```
 
-Automatic updates are not available in the Snap version, because a snap cannot create the systemd user timer they use. Use the prebuilt binary below if you need them. The Snap version keeps its own settings in `~/snap/kabegami-kun/`; the photo folder is shared.
+In the Snap version, automatic updates work while you are logged in: instead of a systemd timer (which a snap cannot create), the app starts in the background when you log in. The Snap version keeps its own settings in `~/snap/kabegami-kun/`; the photo folder is shared.
 
 ### Prebuilt binary (x86_64)
 

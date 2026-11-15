@@ -43,6 +43,17 @@ apps:
       - wayland
       - x11
 
+  background:
+    # 自動更新の裏方。設定で自動更新を入れると、アプリが ~/snap/kabegami-kun/current/.config/autostart に
+    # デスクトップファイルを置き、snapd がログイン時に起動する（systemd のユーザータイマーは snap から作れないため）
+    command: bin/kabegami-kun --background
+    autostart: kabegami-kun-background.desktop
+    extensions: [gnome]
+    plugs:
+      - network
+      - home
+      - gsettings
+
 parts:
   app:
     # GNOME 拡張が LD_LIBRARY_PATH に SDK のライブラリを入れ、rustup と rustc がそれで起動できなくなる

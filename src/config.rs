@@ -131,6 +131,17 @@ impl Interval {
         }
     }
 
+    /// 間隔の秒数（snap 版の自動更新で使う）。
+    pub fn seconds(self) -> u64 {
+        match self {
+            Interval::Minutes30 => 30 * 60,
+            Interval::Hour1 => 60 * 60,
+            Interval::Hours3 => 3 * 60 * 60,
+            Interval::Hours6 => 6 * 60 * 60,
+            Interval::Daily => 24 * 60 * 60,
+        }
+    }
+
     /// systemd の `OnCalendar` の値。
     pub fn on_calendar(self) -> &'static str {
         match self {
@@ -241,6 +252,9 @@ pub struct State {
     /// 同じ写真を何度も設定し直さない（手で選んだ壁紙を、次の写真が配信されるまで残す）ために使う。
     #[serde(default)]
     pub last_auto: Option<String>,
+    /// snap 版の自動更新（`--background`）が最後に壁紙を確かめた時刻（UNIX 時間の秒）。
+    #[serde(default)]
+    pub last_run: Option<u64>,
 }
 
 impl State {

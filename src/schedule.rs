@@ -1,5 +1,7 @@
 //! 壁紙の自動更新。systemd のユーザータイマーで、このアプリの `--apply` を定期的に実行する。
 //!
+//! snap 版は systemd のタイマーを作れないので、ログイン時に自動で起動する裏方（`--background`、`background.rs`）が代わりに動く。
+//!
 //! ```text
 //! ~/.config/systemd/user/kabegami-kun.service   --apply を 1 回実行する
 //! ~/.config/systemd/user/kabegami-kun.timer     実行する時刻
@@ -17,17 +19,58 @@ const UNIT: &str = "kabegami-kun";
 /// 名前を変える前（bing-wallpaper-manager）のタイマー。
 const LEGACY_UNIT: &str = "bing-wallpaper-manager";
 
-/// snap（strict）として動いているか。snap の中からは systemd のユーザータイマーを作れないので、自動更新を出さない。
-pub fn unavailable_in_snap() -> bool {
+/// snap（strict）として動いているか。snap の中からは systemd のユーザータイマーを作れないので、
+/// ログイン時の自動起動（snapd の autostart）と `--background` で自動更新する。
+pub fn in_snap() -> bool {
     std::env::var_os("SNAP").is_some()
+}
+
+/// snap の autostart で起動するデスクトップファイルの名前（snapcraft.yaml の `autostart:` と一致させる）。
+const AUTOSTART_FILE: &str = "kabegami-kun-background.desktop";
+
+fn autostart_path() -> PathBuf {
+    dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("autostart").join(AUTOSTART_FILE)
+}
+
+/// snap 版: 自動更新するならログイン時に裏方を起動するよう登録し、今すぐにも起動する。しないなら登録を消す
+/// （動いている裏方は、設定を読み直したときに自分で終わる）。
+fn apply_snap(auto: &AutoUpdate) -> Result<()> {
+    let path = autostart_path();
+    if !auto.enabled {
+        let _ = fs::remove_file(&path);
+        return Ok(());
+    }
+    if let Some(dir) = path.parent() {
+        fs::create_dir_all(dir).with_context(|| tr!("error.create_dir", path = dir.display()))?;
+    }
+    let entry = "[Desktop Entry]\nType=Application\nName=Kabegami-kun\nExec=kabegami-kun.background\nNoDisplay=true\n";
+    fs::write(&path, entry).with_context(|| tr!("error.write", path = path.display()))?;
+    start_background();
+    Ok(())
+}
+
+/// 裏方（`--background`）を起動する。すでに動いていれば、新しい方はすぐに終わる。
+pub fn start_background() {
+    let Ok(exe) = std::env::current_exe() else { return };
+    let child = Command::new(exe)
+        .arg("--background")
+        .stdin(std::process::Stdio::null())
+        .stdout(std::process::Stdio::null())
+        .spawn();
+    // 終わった子を残さないよう、別のスレッドで待つ
+    if let Ok(mut child) = child {
+        std::thread::spawn(move || {
+            let _ = child.wait();
+        });
+    }
 }
 
 fn unit_dir() -> PathBuf {
     dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("systemd").join("user")
 }
 
-/// `--apply` に付ける引数。
-fn apply_args(auto: &AutoUpdate, market: &str) -> Option<String> {
+/// `--apply` に付ける引数（空白区切り）。
+pub fn apply_args(auto: &AutoUpdate, market: &str) -> Option<String> {
     if !auto.enabled {
         return None;
     }
@@ -79,6 +122,9 @@ fn systemctl(args: &[&str]) -> Result<()> {
 
 /// 設定に合わせてタイマーを作り直す（自動更新しない設定なら止めて消す）。
 pub fn apply(auto: &AutoUpdate, market: &str) -> Result<()> {
+    if in_snap() {
+        return apply_snap(auto);
+    }
     let dir = unit_dir();
     let service = dir.join(format!("{UNIT}.service"));
     let timer = dir.join(format!("{UNIT}.timer"));
@@ -110,7 +156,7 @@ pub fn apply(auto: &AutoUpdate, market: &str) -> Result<()> {
 
 /// 以前の名前のタイマーが残っていたら止めて消し、今の名前で作り直す（二重に動かさないため）。
 pub fn migrate_legacy(auto: &AutoUpdate, market: &str) -> Result<()> {
-    if unavailable_in_snap() {
+    if in_snap() {
         return Ok(());
     }
     let dir = unit_dir();

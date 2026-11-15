@@ -1,6 +1,6 @@
 [package]
 name = "kabegami-kun"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2024"
 description = "Bing の日替わり写真を GNOME の壁紙にする Ubuntu 向けのアプリ"
 license = "MIT OR Apache-2.0"
