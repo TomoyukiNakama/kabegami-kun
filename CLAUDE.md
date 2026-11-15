@@ -132,6 +132,7 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
   snap 版の自動更新は、snapd の autostart で動かす: スイッチを入れると `~/snap/kabegami-kun/current/.config/autostart/kabegami-kun-background.desktop`
   を置いて裏方（`--background`、`src/background.rs`）をすぐに起動し、次回からはログイン時に snapd が起動する（snapcraft.yaml の `background` アプリ）。
   裏方は 1 分ごとに設定を読み直し、間隔がたったら `--apply` と同じ処理をする。自動更新が切られたら終わる。ロックファイルで 1 つに絞る。
+  何をしたかは `~/snap/kabegami-kun/current/.config/kabegami-kun/background.log` に時刻付きで残す（64KB を超えたら後半だけ残す）。
   snap かどうかは `schedule::in_snap`（環境変数 `SNAP`）で判定する。手元では `SNAP=/snap/kabegami-kun/test` を付けて撮影すると snap 版の動作になる。
 - Snap Store では `kabegami-kun` として公開している（https://snapcraft.io/kabegami-kun 、公開者は作者のアカウント）。
   出すときは `snapcraft upload --release=edge <snap>` で edge に出し、作者が `sudo snap refresh kabegami-kun --edge` で

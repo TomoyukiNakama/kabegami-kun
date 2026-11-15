@@ -2859,7 +2859,8 @@ fn random_candidates(stored: Vec<StoredImage>, favorites: bool, current: Option<
 /// - `--mkt ja-JP`: 今日の写真の地域
 /// - `--if-new`: 前回の自動更新と同じ写真なら何もしない
 /// - `--random [--favorites]`: 保存した写真（お気に入り）から無作為に選ぶ
-fn run_cli(args: &[String]) -> anyhow::Result<()> {
+/// `--apply` の処理。壁紙にした写真の説明（画面やログに出す行）を返す。
+fn run_cli(args: &[String]) -> anyhow::Result<String> {
     let has = |flag: &str| args.iter().any(|a| a == flag);
     let config = Config::load();
     let library = Library::new(config.save_dir());
@@ -2878,9 +2879,13 @@ fn run_cli(args: &[String]) -> anyhow::Result<()> {
         // 古い写真は、ここで壁紙用の画像をダウンロードする
         let (_, path) = with_retry(|| library.ensure_image(image))?;
         wallpaper::set_wallpaper(&path, config.fit)?;
-        println!("{} {}", bing::date_text(&image.startdate, true), image.display_title());
-        println!("{}: {}", tr!("cli.wallpaper_set"), path.display());
-        return Ok(());
+        return Ok(format!(
+            "{} {}\n{}: {}",
+            bing::date_text(&image.startdate, true),
+            image.display_title(),
+            tr!("cli.wallpaper_set"),
+            path.display()
+        ));
     }
 
     let mkt = match args.iter().position(|a| a == "--mkt").and_then(|i| args.get(i + 1)) {
@@ -2893,8 +2898,7 @@ fn run_cli(args: &[String]) -> anyhow::Result<()> {
         .expect("fetch_archive returns at least one image");
     let key = image.key();
     if has("--if-new") && config::State::load().last_auto.as_deref() == Some(key.as_str()) {
-        println!("{}: {}", tr!("cli.already_applied"), image.display_title());
-        return Ok(());
+        return Ok(format!("{}: {}", tr!("cli.already_applied"), image.display_title()));
     }
     let stored = with_retry(|| library.store(&PhotoSource::from_bing(&image, mkt), &[mkt], true))?;
     let path = library
@@ -2902,9 +2906,13 @@ fn run_cli(args: &[String]) -> anyhow::Result<()> {
         .ok_or_else(|| anyhow::anyhow!(tr!("error.saved_image_missing")))?;
     wallpaper::set_wallpaper(&path, config.fit)?;
     config::State::update(|state| state.last_auto = Some(key))?;
-    println!("{} {}", bing::date_text(&image.startdate, true), image.copyright);
-    println!("{}: {}", tr!("cli.wallpaper_set"), path.display());
-    Ok(())
+    Ok(format!(
+        "{} {}\n{}: {}",
+        bing::date_text(&image.startdate, true),
+        image.copyright,
+        tr!("cli.wallpaper_set"),
+        path.display()
+    ))
 }
 
 fn main() {
@@ -2932,9 +2940,12 @@ fn main() {
         return;
     }
     if args.iter().any(|a| a == "--apply") {
-        if let Err(err) = run_cli(&args) {
-            eprintln!("{}: {err:#}", tr!("cli.error"));
-            std::process::exit(1);
+        match run_cli(&args) {
+            Ok(message) => println!("{message}"),
+            Err(err) => {
+                eprintln!("{}: {err:#}", tr!("cli.error"));
+                std::process::exit(1);
+            }
         }
         return;
     }

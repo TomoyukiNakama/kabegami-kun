@@ -238,6 +238,11 @@ fn migrate_legacy_in(base: &std::path::Path) {
     }
 }
 
+/// snap 版の自動更新（裏方）のログ。
+pub fn background_log_path() -> PathBuf {
+    config_dir().join("background.log")
+}
+
 fn config_path() -> PathBuf {
     config_dir().join("config.json")
 }

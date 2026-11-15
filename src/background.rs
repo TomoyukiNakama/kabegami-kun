@@ -2,8 +2,10 @@
 //! ログインしている間、設定に合わせて壁紙を変える（systemd のユーザータイマーの代わり）。
 //!
 //! 設定は毎回読み直すので、自動更新を切ると次の確認で終わる。二重に動かないよう、ロックファイルで 1 つに絞る。
+//! 何をしたかは `~/snap/kabegami-kun/current/.config/kabegami-kun/background.log` に残す。
 
-use std::fs::File;
+use std::fs::{self, File, OpenOptions};
+use std::io::Write as _;
 use std::path::PathBuf;
 use std::thread::sleep;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
@@ -20,6 +22,34 @@ const TODAY_SECS: u64 = 60 * 60;
 
 fn lock_path() -> PathBuf {
     dirs::runtime_dir().unwrap_or_else(std::env::temp_dir).join("kabegami-kun-background.lock")
+}
+
+/// ログが大きくなりすぎないよう、この大きさを超えたら後半だけ残す。
+const LOG_LIMIT: u64 = 64 * 1024;
+
+/// 時刻付きでログに 1 件書く（書けなくても止めない）。
+fn log(message: &str) {
+    let path = crate::config::background_log_path();
+    if fs::metadata(&path).is_ok_and(|m| m.len() > LOG_LIMIT) {
+        if let Ok(text) = fs::read_to_string(&path) {
+            let keep = text.len() / 2;
+            let start = text[keep..].find('\n').map_or(keep, |i| keep + i + 1);
+            let _ = fs::write(&path, &text[start..]);
+        }
+    }
+    // 地域の時刻にするため date を使う（日時のライブラリを足さない）
+    let time = std::process::Command::new("date")
+        .arg("+%F %T")
+        .output()
+        .ok()
+        .and_then(|o| String::from_utf8(o.stdout).ok())
+        .map(|s| s.trim().to_string())
+        .unwrap_or_else(|| now().to_string());
+    if let Ok(mut file) = OpenOptions::new().create(true).append(true).open(&path) {
+        for line in message.lines() {
+            let _ = writeln!(file, "{time}  {line}");
+        }
+    }
 }
 
 fn now() -> u64 {
@@ -44,10 +74,12 @@ pub fn run() {
     if lock.try_lock().is_err() {
         return;
     }
+    log("started");
     let mut retry_at = 0;
     loop {
         let config = Config::load();
         if !config.auto.enabled {
+            log("stopped: automatic updates are off");
             return;
         }
         let now = now();
@@ -57,12 +89,14 @@ pub fn run() {
                 .split_whitespace()
                 .map(str::to_string)
                 .collect();
+            log(&format!("--{}", args.join(" ").trim_start_matches("--")));
             match crate::run_cli(&args) {
-                Ok(()) => {
+                Ok(message) => {
+                    log(&message);
                     let _ = State::update(|state| state.last_run = Some(now));
                 }
                 Err(err) => {
-                    eprintln!("{}: {err:#}", tr!("cli.error"));
+                    log(&format!("{}: {err:#}", tr!("cli.error")));
                     retry_at = now + RETRY_SECS;
                 }
             }
