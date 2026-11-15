@@ -27,7 +27,7 @@ A foto que você escolhe ocupa o topo de uma janela sem moldura e de cantos arre
 - **Ações da foto**: clique com o botão direito em uma foto ou use o botão *…* da foto grande para defini-la como papel de parede, adicioná-la aos favoritos, ver as informações dela, pesquisá-la no Bing, copiar o título e o local, abrir a imagem, mostrá-la na pasta ou excluí-la
 - **Ir para o mês**: pule direto para um mês das fotos anteriores
 - **Excluir** (tecla Delete): remove uma foto da pasta após uma confirmação; fotos excluídas não são baixadas de novo
-- **Atualização automática**: uma chave nas configurações troca o papel de parede para você mesmo com o aplicativo fechado — para cada nova foto do dia ou para um favorito ou uma foto salva diferente, no intervalo que você escolher
+- **Atualização automática**: uma chave nas configurações troca o papel de parede para você mesmo com o aplicativo fechado — para cada nova foto do dia ou para um favorito ou uma foto salva diferente, no intervalo que você escolher (exceto na versão Snap)
 - **Configurações** (☰ no canto superior direito, Ctrl+,): Geral (idioma, tema, como as fotos mais antigas são carregadas), Regiões, Papel de parede (ajuste), Atualização automática, Armazenamento (pasta e uso do disco) e Sobre (versão, licença, bibliotecas usadas)
 - **11 idiomas**: japonês, inglês, chinês (simplificado / tradicional), coreano, alemão, francês, espanhol, italiano, português e russo. *Automático* segue o idioma do sistema (`LANG`). Para os títulos e as descrições das fotos, a preferência é pela versão exibida em uma região que usa o idioma selecionado
 - **Tema**: igual ao sistema, claro ou escuro
@@ -140,6 +140,16 @@ Agradecimentos aos dois projetos. Todas as outras bibliotecas estão listadas em
 
 - Ubuntu com o ambiente GNOME (desenvolvido no Ubuntu 26.04; Wayland e X11). O papel de parede é definido por meio do `gsettings` do GNOME
 - Um driver gráfico com suporte a Vulkan (incluído em uma instalação normal do Ubuntu para desktop)
+
+### Central de Aplicativos do Ubuntu (Snap)
+
+Procure *Kabegami-kun* na Central de Aplicativos ([página na Snap Store](https://snapcraft.io/kabegami-kun)) ou execute:
+
+```sh
+sudo snap install kabegami-kun
+```
+
+A atualização automática não está disponível na versão Snap, porque um snap não pode criar o temporizador de usuário do systemd que ela usa. Se precisar dela, use o binário pré-compilado abaixo. A versão Snap guarda as próprias configurações em `~/snap/kabegami-kun/`; a pasta de fotos é compartilhada.
 
 ### Binário pré-compilado (x86_64)
 

@@ -127,6 +127,9 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
 - snap 版の設定は `~/snap/kabegami-kun/current/.config/kabegami-kun/` に置かれる（以前の設定は引き継がない）。
   保存先は実際の `~/ピクチャ` を指す（GNOME 拡張が user-dirs.dirs を写す）。
 - snap の中からは systemd のユーザータイマーを作れないので、snap 版では自動更新を出さず、使えないことを表示する（`schedule::unavailable_in_snap`。環境変数 `SNAP` で判定）。
+- Snap Store では `kabegami-kun` として公開している（https://snapcraft.io/kabegami-kun 、公開者は作者のアカウント）。
+  出すときは `snapcraft upload --release=edge <snap>` で edge に出し、作者が `sudo snap refresh kabegami-kun --edge` で
+  動作を確かめてから `snapcraft release kabegami-kun <revision> stable` で stable に出す。ログイン（`snapcraft login`）は作者が端末で行う。
 
 ## リリースの手順
 

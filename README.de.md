@@ -27,7 +27,7 @@ Das ausgewählte Foto füllt den oberen Teil eines abgerundeten, rahmenlosen Fen
 - **Fotoaktionen**: Klicken Sie mit der rechten Maustaste auf ein Foto oder nutzen Sie die Schaltfläche *…* auf dem großen Foto, um es als Hintergrund festzulegen, zu den Favoriten hinzuzufügen, seine Infos anzusehen, es bei Bing nachzuschlagen, Titel und Ort zu kopieren, das Bild zu öffnen, es im Ordner anzuzeigen oder es zu löschen
 - **Zu Monat springen**: direkt zu einem Monat der früheren Fotos springen
 - **Löschen** (Entf-Taste): entfernt ein Foto nach einer Rückfrage aus dem Ordner; gelöschte Fotos werden nicht erneut heruntergeladen
-- **Auto-Aktualisierung**: Ein Schalter in den Einstellungen wechselt den Hintergrund für Sie, auch wenn die App geschlossen ist – auf jedes neue Foto des Tages oder in einem von Ihnen gewählten Intervall auf einen anderen Favoriten oder ein anderes gespeichertes Foto
+- **Auto-Aktualisierung**: Ein Schalter in den Einstellungen wechselt den Hintergrund für Sie, auch wenn die App geschlossen ist – auf jedes neue Foto des Tages oder in einem von Ihnen gewählten Intervall auf einen anderen Favoriten oder ein anderes gespeichertes Foto (nicht in der Snap-Version)
 - **Einstellungen** (☰ oben rechts, Strg+,): Allgemein (Sprache, Design, Laden älterer Fotos), Regionen, Hintergrund (Anpassung), Auto-Aktualisierung, Speicher (Ordner und Speicherplatz) und Über (Version, Lizenz, verwendete Bibliotheken)
 - **11 Sprachen**: Japanisch, Englisch, Chinesisch (vereinfacht / traditionell), Koreanisch, Deutsch, Französisch, Spanisch, Italienisch, Portugiesisch und Russisch. *Automatisch* folgt der Sprache des Betriebssystems (`LANG`). Bei Titeln und Beschreibungen der Fotos wird die Fassung aus einer Region bevorzugt, in der die gewählte Sprache gesprochen wird
 - **Design**: wie System, hell oder dunkel
@@ -140,6 +140,16 @@ Danke an beide Projekte. Alle anderen Bibliotheken sind in [THIRD_PARTY_LICENSES
 
 - Ubuntu mit dem GNOME-Desktop (entwickelt unter Ubuntu 26.04; Wayland und X11). Der Hintergrund wird über `gsettings` von GNOME festgelegt
 - Ein Grafiktreiber mit Vulkan-Unterstützung (in einer normalen Ubuntu-Desktop-Installation enthalten)
+
+### Ubuntu App Center (Snap)
+
+Suchen Sie im App Center nach *Kabegami-kun* ([Seite im Snap Store](https://snapcraft.io/kabegami-kun)) oder führen Sie aus:
+
+```sh
+sudo snap install kabegami-kun
+```
+
+Die automatische Aktualisierung ist in der Snap-Version nicht verfügbar, weil ein Snap den dafür genutzten systemd-Benutzer-Timer nicht anlegen kann. Wenn Sie sie brauchen, verwenden Sie das fertige Binärpaket unten. Die Snap-Version speichert ihre Einstellungen separat in `~/snap/kabegami-kun/`; der Fotoordner wird gemeinsam genutzt.
 
 ### Fertiges Binärpaket (x86_64)
 

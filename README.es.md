@@ -27,7 +27,7 @@ La foto que elijas ocupa la parte superior de una ventana redondeada y sin marco
 - **Acciones de la foto**: haz clic derecho en una foto o usa el botón *…* de la foto grande para establecerla como fondo, añadirla a tus favoritos, ver su información, buscarla en Bing, copiar su título y lugar, abrir la imagen, mostrarla en su carpeta o eliminarla
 - **Ir al mes**: salta directamente a un mes de las fotos anteriores
 - **Eliminar** (tecla Supr): quita una foto de la carpeta tras una confirmación; las fotos eliminadas no se vuelven a descargar
-- **Actualización automática**: un interruptor en la configuración cambia el fondo por ti incluso con la aplicación cerrada: a cada nueva foto del día, o a un favorito o una foto guardada distintos con el intervalo que elijas
+- **Actualización automática**: un interruptor en la configuración cambia el fondo por ti incluso con la aplicación cerrada: a cada nueva foto del día, o a un favorito o una foto guardada distintos con el intervalo que elijas (no en la versión Snap)
 - **Configuración** (☰ arriba a la derecha, Ctrl+,): General (idioma, tema, cómo se cargan las fotos más antiguas), Regiones, Fondo (ajuste), Actualización automática, Almacenamiento (carpeta y uso de disco) y Acerca de (versión, licencia, bibliotecas utilizadas)
 - **11 idiomas**: japonés, inglés, chino (simplificado / tradicional), coreano, alemán, francés, español, italiano, portugués y ruso. *Automático* sigue el idioma del sistema (`LANG`). Para los títulos y las descripciones de las fotos se prefiere la versión mostrada en una región que use el idioma seleccionado
 - **Tema**: igual que el sistema, claro u oscuro
@@ -140,6 +140,16 @@ Gracias a ambos proyectos. Todas las demás bibliotecas se enumeran en [THIRD_PA
 
 - Ubuntu con el escritorio GNOME (desarrollado en Ubuntu 26.04; Wayland y X11). El fondo se establece mediante `gsettings` de GNOME
 - Un controlador gráfico compatible con Vulkan (incluido en una instalación normal de Ubuntu Desktop)
+
+### Centro de aplicaciones de Ubuntu (Snap)
+
+Busca *Kabegami-kun* en el Centro de aplicaciones ([página en Snap Store](https://snapcraft.io/kabegami-kun)) o ejecuta:
+
+```sh
+sudo snap install kabegami-kun
+```
+
+La actualización automática no está disponible en la versión Snap, porque un snap no puede crear el temporizador de usuario de systemd que usa. Si la necesitas, usa el binario precompilado de abajo. La versión Snap guarda su configuración por separado en `~/snap/kabegami-kun/`; la carpeta de fotos es compartida.
 
 ### Binario precompilado (x86_64)
 

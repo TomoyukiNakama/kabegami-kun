@@ -27,7 +27,7 @@ La photo que vous choisissez occupe le haut d’une fenêtre sans bordure aux co
 - **Actions sur la photo** : faites un clic droit sur une photo ou utilisez le bouton *…* de la grande photo pour la définir comme fond d’écran, l’ajouter à vos favoris, voir ses infos, la rechercher sur Bing, copier son titre et son lieu, ouvrir l’image, l’afficher dans son dossier ou la supprimer
 - **Aller au mois** : accédez directement à un mois des photos précédentes
 - **Supprimer** (touche Suppr) : retire une photo du dossier après confirmation ; les photos supprimées ne sont pas téléchargées de nouveau
-- **Mise à jour automatique** : un interrupteur dans les paramètres change le fond d’écran pour vous, même lorsque l’application est fermée — à chaque nouvelle photo du jour, ou avec un autre favori ou une autre photo enregistrée à l’intervalle de votre choix
+- **Mise à jour automatique** : un interrupteur dans les paramètres change le fond d’écran pour vous, même lorsque l’application est fermée — à chaque nouvelle photo du jour, ou avec un autre favori ou une autre photo enregistrée à l’intervalle de votre choix (sauf dans la version Snap)
 - **Paramètres** (☰ en haut à droite, Ctrl+,) : Général (langue, thème, chargement des photos plus anciennes), Régions, Fond d’écran (ajustement), Mise à jour automatique, Stockage (dossier et espace disque utilisé) et À propos (version, licence, bibliothèques utilisées)
 - **11 langues** : japonais, anglais, chinois (simplifié / traditionnel), coréen, allemand, français, espagnol, italien, portugais et russe. *Automatique* suit la langue du système (`LANG`). Pour les titres et les descriptions des photos, la version affichée dans une région qui utilise la langue sélectionnée est privilégiée
 - **Thème** : comme le système, clair ou sombre
@@ -140,6 +140,16 @@ Merci à ces deux projets. Toutes les autres bibliothèques sont listées dans [
 
 - Ubuntu avec le bureau GNOME (développé sous Ubuntu 26.04 ; Wayland et X11). Le fond d’écran est défini au moyen de `gsettings` de GNOME
 - Un pilote graphique prenant en charge Vulkan (inclus dans une installation normale d’Ubuntu Desktop)
+
+### Centre d’applications d’Ubuntu (Snap)
+
+Cherchez *Kabegami-kun* dans le Centre d’applications ([page du Snap Store](https://snapcraft.io/kabegami-kun)), ou exécutez :
+
+```sh
+sudo snap install kabegami-kun
+```
+
+La mise à jour automatique n’est pas disponible dans la version Snap, car un snap ne peut pas créer le minuteur utilisateur systemd qu’elle utilise. Si vous en avez besoin, utilisez le binaire précompilé ci-dessous. La version Snap conserve ses propres paramètres dans `~/snap/kabegami-kun/` ; le dossier des photos est partagé.
 
 ### Binaire précompilé (x86_64)
 

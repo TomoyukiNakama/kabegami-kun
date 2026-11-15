@@ -27,7 +27,7 @@ La foto che scegli occupa la parte superiore di una finestra senza cornice, dagl
 - **Azioni sulla foto**: fai clic con il pulsante destro su una foto o usa il pulsante *…* sulla foto grande per impostarla come sfondo, aggiungerla ai preferiti, vederne le informazioni, cercarla su Bing, copiarne titolo e luogo, aprire l’immagine, mostrarla nella sua cartella o eliminarla
 - **Vai al mese**: salta direttamente a un mese delle foto precedenti
 - **Elimina** (tasto Canc): rimuove una foto dalla cartella dopo una conferma; le foto eliminate non vengono scaricate di nuovo
-- **Auto-aggiornamento**: un interruttore nelle impostazioni cambia lo sfondo al posto tuo anche con l’app chiusa: con ogni nuova foto del giorno, oppure con un preferito o una foto salvata diversi a un intervallo a tua scelta
+- **Auto-aggiornamento**: un interruttore nelle impostazioni cambia lo sfondo al posto tuo anche con l’app chiusa: con ogni nuova foto del giorno, oppure con un preferito o una foto salvata diversi a un intervallo a tua scelta (non nella versione Snap)
 - **Impostazioni** (☰ in alto a destra, Ctrl+,): Generale (lingua, tema, caricamento delle foto più vecchie), Regioni, Sfondo (adattamento), Auto-aggiornamento, Archiviazione (cartella e spazio occupato) e Informazioni (versione, licenza, librerie utilizzate)
 - **11 lingue**: giapponese, inglese, cinese (semplificato / tradizionale), coreano, tedesco, francese, spagnolo, italiano, portoghese e russo. *Automatico* segue la lingua del sistema (`LANG`). Per titoli e descrizioni delle foto si preferisce la versione mostrata in una regione che usa la lingua selezionata
 - **Tema**: come il sistema, chiaro o scuro
@@ -140,6 +140,16 @@ Grazie a entrambi i progetti. Tutte le altre librerie sono elencate in [THIRD_PA
 
 - Ubuntu con il desktop GNOME (sviluppata su Ubuntu 26.04; Wayland e X11). Lo sfondo viene impostato tramite `gsettings` di GNOME
 - Un driver grafico con supporto Vulkan (incluso in una normale installazione desktop di Ubuntu)
+
+### Centro applicazioni di Ubuntu (Snap)
+
+Cerca *Kabegami-kun* nel Centro applicazioni ([pagina nello Snap Store](https://snapcraft.io/kabegami-kun)) oppure esegui:
+
+```sh
+sudo snap install kabegami-kun
+```
+
+L’aggiornamento automatico non è disponibile nella versione Snap, perché uno snap non può creare il timer utente di systemd che usa. Se ti serve, usa il binario precompilato qui sotto. La versione Snap salva le proprie impostazioni a parte in `~/snap/kabegami-kun/`; la cartella delle foto è condivisa.
 
 ### Binario precompilato (x86_64)
 
