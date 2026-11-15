@@ -1,6 +1,6 @@
 # Ubuntu のアプリセンター（Snap Store）向けのパッケージ。
 #   sudo snap install snapcraft --classic && sudo snap install lxd && sudo lxd init --auto
-#   snapcraft            # kabegami-kun_<version>_amd64.snap を作る
+#   snapcraft pack       # kabegami-kun_<version>_amd64.snap を作る（target/ が大きいので、git clone した別のフォルダで実行する）
 #   sudo snap install --dangerous ./kabegami-kun_*.snap
 name: kabegami-kun
 title: Kabegami-kun
@@ -20,6 +20,7 @@ license: MIT OR Apache-2.0
 website: https://github.com/TomoyukiNakama/kabegami-kun
 source-code: https://github.com/TomoyukiNakama/kabegami-kun
 issues: https://github.com/TomoyukiNakama/kabegami-kun/issues
+contact: https://github.com/TomoyukiNakama/kabegami-kun/issues
 icon: assets/icons/kabegami-kun.svg
 adopt-info: app
 
@@ -44,9 +45,12 @@ apps:
 
 parts:
   app:
-    plugin: rust
+    # GNOME 拡張が LD_LIBRARY_PATH に SDK のライブラリを入れ、rustup と rustc がそれで起動できなくなる
+    # （rust プラグインも同じ理由で「rustup が無い」と判断する）。ビルドの間だけ外し、Ubuntu 24.04 のライブラリでビルドする
+    plugin: nil
     source: .
-    rust-channel: stable
+    build-snaps:
+      - rustup
     build-packages:
       - build-essential
       - pkg-config
@@ -60,7 +64,13 @@ parts:
       - libxkbcommon0
       - libxkbcommon-x11-0
     override-build: |
-      craftctl default
+      (
+        unset LD_LIBRARY_PATH PKG_CONFIG_PATH
+        export PATH="/snap/bin:$HOME/.cargo/bin:/usr/bin:/bin"
+        rustup toolchain install stable --profile minimal
+        cargo build --release --locked
+      )
+      install -Dm755 target/release/kabegami-kun "$CRAFT_PART_INSTALL/bin/kabegami-kun"
       craftctl set version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
       # アイコンは snap の中のパスで指す
       install -Dm644 assets/icons/hicolor/256x256/apps/kabegami-kun.png \

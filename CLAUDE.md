@@ -118,6 +118,16 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
 - 検索（`src/search.rs`）は保存済みの写真のメタデータだけを対象にする。解説文は最初の検索時にアーカイブから補い、
   色の割合（`src/colors.rs`）は取得・読み込みのあとにサムネイルから裏で解析する。
 
+## snap（Ubuntu のアプリセンター）
+
+- 定義は `snap/snapcraft.yaml`（strict、GNOME 拡張、core24）。ビルドは LXD の中で行う。
+  `target/` が数十 GB あり丸ごと写されるので、`git clone` した別のフォルダで `snapcraft pack` する（コミット済みのファイルだけが入る）。
+- GNOME 拡張が LD_LIBRARY_PATH に SDK のライブラリを入れ、rustup と rustc が起動できなくなる（snapcraft の rust プラグインも
+  「rustup が無い」と誤って判断する）。そのため `plugin: nil` で、cargo の部分だけ LD_LIBRARY_PATH を外したサブシェルで実行している。
+- snap 版の設定は `~/snap/kabegami-kun/current/.config/kabegami-kun/` に置かれる（以前の設定は引き継がない）。
+  保存先は実際の `~/ピクチャ` を指す（GNOME 拡張が user-dirs.dirs を写す）。
+- snap の中からは systemd のユーザータイマーを作れないので、自動更新はそのままでは動かない。
+
 ## リリースの手順
 
 1. `Cargo.toml` の version を上げる（「このアプリについて」に出る）。
