@@ -1,0 +1,71 @@
+# Ubuntu のアプリセンター（Snap Store）向けのパッケージ。
+#   sudo snap install snapcraft --classic && sudo snap install lxd && sudo lxd init --auto
+#   snapcraft            # kabegami-kun_<version>_amd64.snap を作る
+#   sudo snap install --dangerous ./kabegami-kun_*.snap
+name: kabegami-kun
+title: Kabegami-kun
+summary: Browse Bing’s daily photos and set them as your GNOME wallpaper
+description: |
+  Kabegami-kun shows Bing’s daily photos from the regions you choose
+  and sets the one you pick as your GNOME wallpaper.
+
+  - Today’s photos from up to 12 Bing regions, and earlier photos grouped by date
+  - Search saved photos by words or by color
+  - Favorites, photo info with Bing’s description, and a preview of how the photo fits your monitor
+  - 11 languages
+
+  Photos are copyrighted by their photographers and providers.
+  This app is not affiliated with Microsoft.
+license: MIT OR Apache-2.0
+website: https://github.com/TomoyukiNakama/kabegami-kun
+source-code: https://github.com/TomoyukiNakama/kabegami-kun
+issues: https://github.com/TomoyukiNakama/kabegami-kun/issues
+icon: assets/icons/kabegami-kun.svg
+adopt-info: app
+
+base: core24
+grade: stable
+confinement: strict
+platforms:
+  amd64:
+
+apps:
+  kabegami-kun:
+    command: bin/kabegami-kun
+    desktop: share/applications/kabegami-kun.desktop
+    extensions: [gnome]
+    plugs:
+      - network
+      - home
+      - gsettings
+      - opengl
+      - wayland
+      - x11
+
+parts:
+  app:
+    plugin: rust
+    source: .
+    rust-channel: stable
+    build-packages:
+      - build-essential
+      - pkg-config
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+      - libwayland-dev
+      - libxcb1-dev
+      - libfontconfig-dev
+      - libfreetype-dev
+    stage-packages:
+      - libxkbcommon0
+      - libxkbcommon-x11-0
+    override-build: |
+      craftctl default
+      craftctl set version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+      # アイコンは snap の中のパスで指す
+      install -Dm644 assets/icons/hicolor/256x256/apps/kabegami-kun.png \
+        "$CRAFT_PART_INSTALL/share/icons/hicolor/256x256/apps/kabegami-kun.png"
+      install -Dm644 assets/kabegami-kun.desktop \
+        "$CRAFT_PART_INSTALL/share/applications/kabegami-kun.desktop"
+      sed -i 's|^Icon=.*|Icon=${SNAP}/share/icons/hicolor/256x256/apps/kabegami-kun.png|' \
+        "$CRAFT_PART_INSTALL/share/applications/kabegami-kun.desktop"

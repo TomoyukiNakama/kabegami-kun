@@ -1,4 +1,4 @@
-# pt-BR: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# pt-BR: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "Bibliotecas usadas (%{count})"
 about.libraries_note: "Clique em uma biblioteca para abrir a página dela. A lista também está em THIRD_PARTY_LICENSES.md."
@@ -20,7 +20,7 @@ action.search_tooltip: "Pesquisar (Ctrl+F)"
 action.set_wallpaper: "Definir como papel de parede"
 action.settings_tooltip: "Configurações (Ctrl+,)"
 action.show_in_folder: "Mostrar na pasta"
-app.name: "Papel de parede Bing"
+app.name: "Kabegami-kun"
 auto.desc: "Troca o papel de parede automaticamente, mesmo com o aplicativo fechado. Usa um temporizador de usuário do systemd."
 auto.favorites: "Dos favoritos"
 auto.favorites_desc: "Escolhe um favorito diferente a cada vez."
@@ -40,7 +40,7 @@ cli.error: "Erro"
 cli.no_favorites: "Não há fotos favoritas"
 cli.no_photos: "Não há fotos salvas"
 cli.retrying: "Nova tentativa em %{seconds} segundos"
-cli.usage: "Uso:\n  bing-wallpaper-manager                                  Abrir o painel\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  Definir a foto do dia como papel de parede e sair (--if-new: não fazer nada se for a mesma foto da última vez)\n  bing-wallpaper-manager --apply --random [--favorites]   Definir como papel de parede uma foto salva ao acaso (--favorites: um favorito)"
+cli.usage: "Uso:\n  kabegami-kun                                  Abrir o painel\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  Definir a foto do dia como papel de parede e sair (--if-new: não fazer nada se for a mesma foto da última vez)\n  kabegami-kun --apply --random [--favorites]   Definir como papel de parede uma foto salva ao acaso (--favorites: um favorito)"
 cli.wallpaper_set: "Papel de parede definido"
 color.black: "Preto"
 color.blue: "Azul"

@@ -4,8 +4,8 @@
 #   scripts/package-release.sh
 #
 # target/dist/ に次の 2 つができる（バージョンは Cargo.toml から取る）:
-#   bing-wallpaper-manager-<version>-x86_64-linux.tar.gz
-#   bing-wallpaper-manager-<version>-x86_64-linux.tar.gz.sha256
+#   kabegami-kun-<version>-x86_64-linux.tar.gz
+#   kabegami-kun-<version>-x86_64-linux.tar.gz.sha256
 #
 # パッケージの中身は ~/.local と同じ並び（bin/、share/applications/、share/icons/、share/doc/）で、
 #   tar -xzf <パッケージ> -C ~/.local --strip-components=1
@@ -13,7 +13,7 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
-APP=bing-wallpaper-manager
+APP=kabegami-kun
 VERSION=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)
 NAME=$APP-$VERSION-x86_64-linux
 DIST=target/dist

@@ -1,4 +1,4 @@
-# ko: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# ko: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "사용한 라이브러리 (%{count}개)"
 about.libraries_note: "클릭하면 해당 라이브러리 페이지가 열립니다. 목록은 THIRD_PARTY_LICENSES.md에도 있습니다."
@@ -20,7 +20,7 @@ action.search_tooltip: "검색 (Ctrl+F)"
 action.set_wallpaper: "배경화면으로 설정"
 action.settings_tooltip: "설정 (Ctrl+,)"
 action.show_in_folder: "폴더에서 보기"
-app.name: "Bing 배경화면"
+app.name: "Kabegami-kun"
 auto.desc: "앱을 닫아도 배경화면을 자동으로 바꿉니다. systemd 사용자 타이머를 사용합니다."
 auto.favorites: "즐겨찾기에서 선택"
 auto.favorites_desc: "즐겨찾기한 사진 중에서 매번 다른 사진을 고릅니다."
@@ -40,7 +40,7 @@ cli.error: "오류"
 cli.no_favorites: "즐겨찾기한 사진이 없습니다"
 cli.no_photos: "저장한 사진이 없습니다"
 cli.retrying: "%{seconds}초 후 다시 시도합니다"
-cli.usage: "사용법:\n  bing-wallpaper-manager                                  대시보드 열기\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  오늘의 사진을 배경화면으로 설정하고 종료 (--if-new: 지난번과 같은 사진이면 아무것도 하지 않음)\n  bing-wallpaper-manager --apply --random [--favorites]   저장한 사진(--favorites: 즐겨찾기) 중 하나를 무작위로 배경화면으로 설정"
+cli.usage: "사용법:\n  kabegami-kun                                  대시보드 열기\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  오늘의 사진을 배경화면으로 설정하고 종료 (--if-new: 지난번과 같은 사진이면 아무것도 하지 않음)\n  kabegami-kun --apply --random [--favorites]   저장한 사진(--favorites: 즐겨찾기) 중 하나를 무작위로 배경화면으로 설정"
 cli.wallpaper_set: "배경화면으로 설정했습니다"
 color.black: "검정"
 color.blue: "파랑"

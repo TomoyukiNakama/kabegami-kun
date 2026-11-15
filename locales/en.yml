@@ -1,4 +1,4 @@
-# en: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# en: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "Libraries used (%{count})"
 about.libraries_note: "Click a library to open its page. The list is also in THIRD_PARTY_LICENSES.md."
@@ -20,7 +20,7 @@ action.search_tooltip: "Search (Ctrl+F)"
 action.set_wallpaper: "Set as wallpaper"
 action.settings_tooltip: "Settings (Ctrl+,)"
 action.show_in_folder: "Show in folder"
-app.name: "Bing Wallpaper"
+app.name: "Kabegami-kun"
 auto.desc: "Changes the wallpaper automatically, even when the app is closed. Uses a systemd user timer."
 auto.favorites: "From favorites"
 auto.favorites_desc: "Picks a different favorite each time."
@@ -40,7 +40,7 @@ cli.error: "Error"
 cli.no_favorites: "No favorite photos"
 cli.no_photos: "No saved photos"
 cli.retrying: "Retrying in %{seconds} seconds"
-cli.usage: "Usage:\n  bing-wallpaper-manager                                  Open the dashboard\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  Set today's photo as the wallpaper and exit (--if-new: do nothing if it is the same photo as last time)\n  bing-wallpaper-manager --apply --random [--favorites]   Set a random saved photo (--favorites: a favorite) as the wallpaper"
+cli.usage: "Usage:\n  kabegami-kun                                  Open the dashboard\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  Set today's photo as the wallpaper and exit (--if-new: do nothing if it is the same photo as last time)\n  kabegami-kun --apply --random [--favorites]   Set a random saved photo (--favorites: a favorite) as the wallpaper"
 cli.wallpaper_set: "Wallpaper set"
 color.black: "Black"
 color.blue: "Blue"

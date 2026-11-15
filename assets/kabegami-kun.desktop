@@ -1,0 +1,21 @@
+[Desktop Entry]
+Type=Application
+Name=Kabegami-kun
+Name[ja]=Kabegami-kun
+Name[zh_CN]=Kabegami-kun
+Name[zh_TW]=Kabegami-kun
+Name[ko]=Kabegami-kun
+Name[de]=Kabegami-kun
+Name[fr]=Kabegami-kun
+Name[es]=Kabegami-kun
+Name[it]=Kabegami-kun
+Name[pt_BR]=Kabegami-kun
+Name[ru]=Kabegami-kun
+Comment=Browse Bing’s daily photos and set them as your wallpaper
+Comment[ja]=Bing の日替わり写真を見比べて壁紙にする
+Exec=kabegami-kun
+Icon=kabegami-kun
+Terminal=false
+Categories=Graphics;Viewer;
+Keywords=Bing;wallpaper;background;photo;
+StartupWMClass=kabegami-kun

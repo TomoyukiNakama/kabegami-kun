@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 [English](README.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [한국어](README.ko.md) | **Deutsch** | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | [Русский](README.ru.md)
 
@@ -109,7 +109,7 @@ Schalten Sie den Schalter ein, damit der Hintergrund von selbst wechselt, auch w
 - **Aus Favoriten**: wählt jedes Mal einen anderen Favoriten – alle 30 Minuten, stündlich, alle 3 Stunden, alle 6 Stunden oder täglich
 - **Aus gespeicherten Fotos**: dasselbe, aber aus allen gespeicherten Fotos. Ältere Fotos werden bei der Auswahl heruntergeladen
 
-Der Schalter legt einen systemd-Benutzer-Timer an (`~/.config/systemd/user/bing-wallpaper-manager.timer` und `.service`), der diese App mit `--apply` ausführt; beim Ausschalten wird der Timer entfernt. Der Timer startet die App von ihrem jetzigen Speicherort – schalten Sie den Schalter also aus und wieder ein, wenn Sie die App verschieben.
+Der Schalter legt einen systemd-Benutzer-Timer an (`~/.config/systemd/user/kabegami-kun.timer` und `.service`), der diese App mit `--apply` ausführt; beim Ausschalten wird der Timer entfernt. Der Timer startet die App von ihrem jetzigen Speicherort – schalten Sie den Schalter also aus und wieder ein, wenn Sie die App verschieben.
 
 ![Einstellungen der Auto-Aktualisierung mit eingeschaltetem Schalter](docs/auto.de.jpg)
 
@@ -143,10 +143,10 @@ Danke an beide Projekte. Alle anderen Bibliotheken sind in [THIRD_PARTY_LICENSES
 
 ### Fertiges Binärpaket (x86_64)
 
-Jedes [Release](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest) enthält ein fertig gebautes Paket für Ubuntu 26.04 oder neuer (glibc 2.43+). Laden Sie `bing-wallpaper-manager-<Version>-x86_64-linux.tar.gz` herunter und entpacken Sie es nach `~/.local`:
+Jedes [Release](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest) enthält ein fertig gebautes Paket für Ubuntu 26.04 oder neuer (glibc 2.43+). Laden Sie `kabegami-kun-<Version>-x86_64-linux.tar.gz` herunter und entpacken Sie es nach `~/.local`:
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 Wenn Sie stattdessen aus dem Quellcode bauen möchten, folgen Sie den Schritten unten.
@@ -173,8 +173,8 @@ Wenn Sie lieber das `cargo` von Ubuntu in Ihrem PATH behalten, funktioniert auch
 ### 3. Quellcode holen
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. Bauen und installieren
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-Das baut die Release-Version und installiert die App, ihr Symbol und einen Desktop-Eintrag unter `~/.local`. *Bing-Hintergrund* erscheint dann in der GNOME-Anwendungsübersicht (melden Sie sich ab und wieder an, falls es nicht sofort auftaucht), und `bing-wallpaper-manager` lässt sich aus einem Terminal starten, wenn `~/.local/bin` in Ihrem PATH liegt. Der erste Build lädt und kompiliert alle Abhängigkeiten und dauert mehrere Minuten.
+Das baut die Release-Version und installiert die App, ihr Symbol und einen Desktop-Eintrag unter `~/.local`. *Kabegami-kun* erscheint dann in der GNOME-Anwendungsübersicht (melden Sie sich ab und wieder an, falls es nicht sofort auftaucht), und `kabegami-kun` lässt sich aus einem Terminal starten, wenn `~/.local/bin` in Ihrem PATH liegt. Der erste Build lädt und kompiliert alle Abhängigkeiten und dauert mehrere Minuten.
 
-Um an einem anderen Ort zu installieren, setzen Sie `PREFIX`, zum Beispiel `PREFIX=/opt/bing-wallpaper scripts/install.sh`.
+Um an einem anderen Ort zu installieren, setzen Sie `PREFIX`, zum Beispiel `PREFIX=/opt/kabegami-kun scripts/install.sh`.
 
 ### Aktualisieren
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-Das entfernt die App, das Symbol und den Desktop-Eintrag. Ihre Einstellungen (`~/.config/bing-wallpaper-manager/`) und die gespeicherten Fotos (der Speicherordner) bleiben erhalten; löschen Sie sie selbst, wenn Sie sie nicht mehr brauchen.
+Das entfernt die App, das Symbol und den Desktop-Eintrag. Ihre Einstellungen (`~/.config/kabegami-kun/`) und die gespeicherten Fotos (der Speicherordner) bleiben erhalten; löschen Sie sie selbst, wenn Sie sie nicht mehr brauchen.
 
 ### Ohne Installation ausführen
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## Dateien
 
-Den Speicherordner wählen Sie unter *Einstellungen → Speicher* (Standard: `~/Pictures/BingWallpaper` bzw. der lokalisierte Bilder-Ordner). Die Einstellungen werden in `~/.config/bing-wallpaper-manager/config.json` gespeichert, und was sich die App merkt (etwa die Fenstergröße), in `state.json` im selben Ordner.
+Den Speicherordner wählen Sie unter *Einstellungen → Speicher* (Standard: `~/Pictures/kabegami-kun` bzw. der lokalisierte Bilder-Ordner). Die Einstellungen werden in `~/.config/kabegami-kun/config.json` gespeichert, und was sich die App merkt (etwa die Fenstergröße), in `state.json` im selben Ordner.
 Ein Foto wird nur einmal gespeichert, auch wenn es in mehreren Regionen oder an verschiedenen Tagen gezeigt wird, und gespeicherte Bilder werden nie erneut heruntergeladen.
 
 ```text
@@ -227,11 +227,11 @@ Ein Foto wird nur einmal gespeichert, auch wenn es in mehreren Regionen oder an 
 ## Befehlszeile
 
 ```sh
-bing-wallpaper-manager --apply                       # Foto des Tages als Hintergrund festlegen
-bing-wallpaper-manager --apply --mkt en-US           # Region wählen
-bing-wallpaper-manager --apply --if-new              # nichts tun, wenn es dasselbe Foto wie zuletzt ist
-bing-wallpaper-manager --apply --random              # ein zufälliges gespeichertes Foto festlegen
-bing-wallpaper-manager --apply --random --favorites  # einen zufälligen Favoriten festlegen
+kabegami-kun --apply                       # Foto des Tages als Hintergrund festlegen
+kabegami-kun --apply --mkt en-US           # Region wählen
+kabegami-kun --apply --if-new              # nichts tun, wenn es dasselbe Foto wie zuletzt ist
+kabegami-kun --apply --random              # ein zufälliges gespeichertes Foto festlegen
+kabegami-kun --apply --random --favorites  # einen zufälligen Favoriten festlegen
 ```
 
 Ohne `--mkt` wird die unter *Auto-Aktualisierung* gewählte Region verwendet (oder die erste angezeigte Region). Wenn das Netzwerk noch nicht bereit ist, etwa direkt nach der Anmeldung, versucht `--apply` es einige Male erneut, bevor es aufgibt.
@@ -241,8 +241,8 @@ Ohne `--mkt` wird die unter *Auto-Aktualisierung* gewählte Region verwendet (od
 Schalten Sie den Schalter unter **Einstellungen** → **Auto-Aktualisierung** ein (siehe [Auto-Aktualisierung](#auto-aktualisierung)); er richtet den systemd-Benutzer-Timer für Sie ein. So sehen Sie nach, ob er läuft:
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 Wenn Sie mit einer früheren Version `bing-wallpaper.timer` von Hand angelegt haben, deaktivieren Sie ihn, damit nicht beide laufen: `systemctl --user disable --now bing-wallpaper.timer`.
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### Release-Pakete
 
-`scripts/package-release.sh` baut die Release-Version und erzeugt `target/dist/bing-wallpaper-manager-<Version>-x86_64-linux.tar.gz` (und die zugehörige `.sha256`) mit der Programmdatei, den Symbolen, dem Desktop-Eintrag und den Lizenzdateien, einschließlich der Lizenztexte aller mitgelieferten Bibliotheken. Die Version stammt aus `Cargo.toml`.
+`scripts/package-release.sh` baut die Release-Version und erzeugt `target/dist/kabegami-kun-<Version>-x86_64-linux.tar.gz` (und die zugehörige `.sha256`) mit der Programmdatei, den Symbolen, dem Desktop-Eintrag und den Lizenzdateien, einschließlich der Lizenztexte aller mitgelieferten Bibliotheken. Die Version stammt aus `Cargo.toml`.
 
 ### Übersetzungen
 
@@ -313,7 +313,7 @@ Die Texte liegen in `locales/<Sprache>.yml` (`ja`, `en`, `zh-CN`, `zh-TW`, `ko`,
 | `locales/*.yml` | Übersetzungen (beim Bauen mit rust-i18n eingebettet) |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | Verwendete Bibliotheken (erzeugt von `scripts/gen-third-party.py`) |
 | `assets/icons/` | App-Symbol (SVG sowie von `scripts/render-icon.py` gerenderte PNGs) |
-| `assets/bing-wallpaper-manager.desktop` | Desktop-Eintrag (installiert von `scripts/install.sh`) |
+| `assets/kabegami-kun.desktop` | Desktop-Eintrag (installiert von `scripts/install.sh`) |
 | `scripts/rustc-stable` | Wählt den stabilen rustc von rustup für cargo aus (siehe „2. Rust installieren“) |
 | `scripts/screenshot.sh` | Screenshots auf einem virtuellen Display |
 | `tools/vpointer/` | Virtuelle Maus und Tastatur für Screenshots (eigenes Crate) |

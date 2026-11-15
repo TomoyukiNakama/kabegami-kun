@@ -1,8 +1,8 @@
 //! 壁紙の自動更新。systemd のユーザータイマーで、このアプリの `--apply` を定期的に実行する。
 //!
 //! ```text
-//! ~/.config/systemd/user/bing-wallpaper-manager.service   --apply を 1 回実行する
-//! ~/.config/systemd/user/bing-wallpaper-manager.timer     実行する時刻
+//! ~/.config/systemd/user/kabegami-kun.service   --apply を 1 回実行する
+//! ~/.config/systemd/user/kabegami-kun.timer     実行する時刻
 //! ```
 
 use std::fs;
@@ -13,7 +13,9 @@ use anyhow::{Context as _, Result, bail};
 
 use crate::config::{AutoMode, AutoUpdate};
 
-const UNIT: &str = "bing-wallpaper-manager";
+const UNIT: &str = "kabegami-kun";
+/// 名前を変える前（bing-wallpaper-manager）のタイマー。
+const LEGACY_UNIT: &str = "bing-wallpaper-manager";
 
 fn unit_dir() -> PathBuf {
     dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("systemd").join("user")
@@ -37,7 +39,7 @@ fn unit_texts(exe: &Path, auto: &AutoUpdate, market: &str) -> Option<(String, St
     // 空白などを含むパスでも 1 つの引数になるように引用符で囲む（% は systemd の指定子なので重ねる）
     let exe = exe.display().to_string().replace('%', "%%").replace('\\', "\\\\").replace('"', "\\\"");
     let service = format!(
-        "[Unit]\nDescription=Bing Wallpaper Manager: update the wallpaper\n\n\
+        "[Unit]\nDescription=Kabegami-kun: update the wallpaper\n\n\
          [Service]\nType=oneshot\nExecStart=\"{exe}\" {args}\n"
     );
     // 今日の写真: ログイン直後と 1 時間ごとに確かめ、新しい写真が配信されていたときだけ壁紙を変える
@@ -46,7 +48,7 @@ fn unit_texts(exe: &Path, auto: &AutoUpdate, market: &str) -> Option<(String, St
         _ => format!("OnCalendar={}\n", auto.interval.on_calendar()),
     };
     let timer = format!(
-        "[Unit]\nDescription=Bing Wallpaper Manager: update the wallpaper\n\n\
+        "[Unit]\nDescription=Kabegami-kun: update the wallpaper\n\n\
          [Timer]\n{schedule}Persistent=true\n\n\
          [Install]\nWantedBy=timers.target\n"
     );
@@ -99,6 +101,22 @@ pub fn apply(auto: &AutoUpdate, market: &str) -> Result<()> {
         }
     }
     Ok(())
+}
+
+/// 以前の名前のタイマーが残っていたら止めて消し、今の名前で作り直す（二重に動かさないため）。
+pub fn migrate_legacy(auto: &AutoUpdate, market: &str) -> Result<()> {
+    let dir = unit_dir();
+    let timer = dir.join(format!("{LEGACY_UNIT}.timer"));
+    let service = dir.join(format!("{LEGACY_UNIT}.service"));
+    if !timer.exists() && !service.exists() {
+        return Ok(());
+    }
+    // 止められなくても（systemd が無いなど）、ファイルは消す
+    let _ = systemctl(&["disable", "--now", &format!("{LEGACY_UNIT}.timer")]);
+    let _ = fs::remove_file(&timer);
+    let _ = fs::remove_file(&service);
+    let _ = systemctl(&["daemon-reload"]);
+    apply(auto, market)
 }
 
 #[cfg(test)]

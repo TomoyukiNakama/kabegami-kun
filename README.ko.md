@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 [English](README.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | **한국어** | [Deutsch](README.de.md) | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | [Русский](README.ru.md)
 
@@ -109,7 +109,7 @@ Bing은 지역마다 다른 사진과 제목, 설명을 보여 줍니다. 대시
 - **즐겨찾기에서 선택**: 30분마다, 1시간마다, 3시간마다, 6시간마다 또는 매일, 즐겨찾기 중에서 매번 다른 사진을 고릅니다
 - **저장한 사진에서 선택**: 위와 같지만 저장한 모든 사진 중에서 고릅니다. 오래된 사진은 선택될 때 다운로드합니다
 
-스위치를 켜면 이 앱을 `--apply`로 실행하는 systemd 사용자 타이머(`~/.config/systemd/user/bing-wallpaper-manager.timer`와 `.service`)가 만들어지고, 끄면 타이머가 제거됩니다. 타이머는 앱을 현재 위치에서 실행하므로, 앱을 옮겼다면 스위치를 껐다가 다시 켜세요.
+스위치를 켜면 이 앱을 `--apply`로 실행하는 systemd 사용자 타이머(`~/.config/systemd/user/kabegami-kun.timer`와 `.service`)가 만들어지고, 끄면 타이머가 제거됩니다. 타이머는 앱을 현재 위치에서 실행하므로, 앱을 옮겼다면 스위치를 껐다가 다시 켜세요.
 
 ![스위치를 켠 자동 업데이트 설정](docs/auto.ko.jpg)
 
@@ -143,10 +143,10 @@ Bing은 지역마다 다른 사진과 제목, 설명을 보여 줍니다. 대시
 
 ### 빌드된 바이너리 (x86_64)
 
-각 [릴리스](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest)에는 Ubuntu 26.04 이상(glibc 2.43 이상)용으로 빌드된 패키지가 있습니다. `bing-wallpaper-manager-<버전>-x86_64-linux.tar.gz`를 다운로드하여 `~/.local`에 풉니다.
+각 [릴리스](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest)에는 Ubuntu 26.04 이상(glibc 2.43 이상)용으로 빌드된 패키지가 있습니다. `kabegami-kun-<버전>-x86_64-linux.tar.gz`를 다운로드하여 `~/.local`에 풉니다.
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 소스에서 직접 빌드하려면 아래 순서를 따르세요.
@@ -173,8 +173,8 @@ PATH에 Ubuntu의 `cargo`를 그대로 두고 싶다면 그래도 괜찮습니�
 ### 3. 소스 가져오기
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. 빌드 및 설치
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-릴리스 버전을 빌드하고 앱과 아이콘, 데스크톱 항목을 `~/.local` 아래에 설치합니다. 그러면 GNOME 앱 목록에 *Bing 배경화면*이 나타나고(바로 보이지 않으면 로그아웃했다가 다시 로그인하세요), `~/.local/bin`이 PATH에 있으면 터미널에서 `bing-wallpaper-manager`로 실행할 수도 있습니다. 첫 빌드는 모든 의존성을 다운로드하고 컴파일하므로 몇 분이 걸립니다.
+릴리스 버전을 빌드하고 앱과 아이콘, 데스크톱 항목을 `~/.local` 아래에 설치합니다. 그러면 GNOME 앱 목록에 *Kabegami-kun*이 나타나고(바로 보이지 않으면 로그아웃했다가 다시 로그인하세요), `~/.local/bin`이 PATH에 있으면 터미널에서 `kabegami-kun`으로 실행할 수도 있습니다. 첫 빌드는 모든 의존성을 다운로드하고 컴파일하므로 몇 분이 걸립니다.
 
-다른 위치에 설치하려면 `PREFIX`를 지정합니다. 예: `PREFIX=/opt/bing-wallpaper scripts/install.sh`.
+다른 위치에 설치하려면 `PREFIX`를 지정합니다. 예: `PREFIX=/opt/kabegami-kun scripts/install.sh`.
 
 ### 업데이트
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-앱과 아이콘, 데스크톱 항목을 제거합니다. 설정(`~/.config/bing-wallpaper-manager/`)과 저장한 사진(저장 폴더)은 그대로 남으므로, 더 필요하지 않으면 직접 삭제하세요.
+앱과 아이콘, 데스크톱 항목을 제거합니다. 설정(`~/.config/kabegami-kun/`)과 저장한 사진(저장 폴더)은 그대로 남으므로, 더 필요하지 않으면 직접 삭제하세요.
 
 ### 설치하지 않고 실행
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## 파일
 
-저장 폴더는 *설정 → 저장*에서 고릅니다(기본값: `~/Pictures/BingWallpaper` 또는 현지화된 사진 폴더). 설정은 `~/.config/bing-wallpaper-manager/config.json`에, 앱이 기억하는 상태(창 크기 등)는 같은 폴더의 `state.json`에 저장됩니다.
+저장 폴더는 *설정 → 저장*에서 고릅니다(기본값: `~/Pictures/kabegami-kun` 또는 현지화된 사진 폴더). 설정은 `~/.config/kabegami-kun/config.json`에, 앱이 기억하는 상태(창 크기 등)는 같은 폴더의 `state.json`에 저장됩니다.
 같은 사진은 여러 지역이나 다른 날짜에 표시되어도 한 번만 저장하며, 저장한 이미지는 다시 다운로드하지 않습니다.
 
 ```text
@@ -227,11 +227,11 @@ cargo run --release
 ## 명령줄
 
 ```sh
-bing-wallpaper-manager --apply                       # 오늘의 사진을 배경화면으로 설정
-bing-wallpaper-manager --apply --mkt en-US           # 지역 지정
-bing-wallpaper-manager --apply --if-new              # 지난번과 같은 사진이면 아무것도 하지 않음
-bing-wallpaper-manager --apply --random              # 저장한 사진 중 하나를 무작위로 설정
-bing-wallpaper-manager --apply --random --favorites  # 즐겨찾기 중 하나를 무작위로 설정
+kabegami-kun --apply                       # 오늘의 사진을 배경화면으로 설정
+kabegami-kun --apply --mkt en-US           # 지역 지정
+kabegami-kun --apply --if-new              # 지난번과 같은 사진이면 아무것도 하지 않음
+kabegami-kun --apply --random              # 저장한 사진 중 하나를 무작위로 설정
+kabegami-kun --apply --random --favorites  # 즐겨찾기 중 하나를 무작위로 설정
 ```
 
 `--mkt`를 생략하면 *자동 업데이트*에서 고른 지역(없으면 표시 중인 첫 번째 지역)을 사용합니다. 로그인 직후처럼 네트워크가 아직 연결되지 않았을 때는 `--apply`가 몇 번 다시 시도한 뒤에 포기합니다.
@@ -241,8 +241,8 @@ bing-wallpaper-manager --apply --random --favorites  # 즐겨찾기 중 하나�
 **설정** → **자동 업데이트**에서 스위치를 켜면([자동 업데이트](#자동-업데이트) 참고) systemd 사용자 타이머가 자동으로 설정됩니다. 상태는 다음과 같이 확인합니다.
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 이전 버전에서 `bing-wallpaper.timer`를 직접 만들었다면 두 타이머가 함께 실행되지 않도록 비활성화하세요: `systemctl --user disable --now bing-wallpaper.timer`.
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### 릴리스 패키지
 
-`scripts/package-release.sh`는 릴리스 버전을 빌드하고, 바이너리, 아이콘, 데스크톱 항목, 라이선스 파일(포함된 모든 라이브러리의 라이선스 전문 포함)을 담은 `target/dist/bing-wallpaper-manager-<버전>-x86_64-linux.tar.gz`(와 `.sha256`)를 만듭니다. 버전은 `Cargo.toml`에서 가져옵니다.
+`scripts/package-release.sh`는 릴리스 버전을 빌드하고, 바이너리, 아이콘, 데스크톱 항목, 라이선스 파일(포함된 모든 라이브러리의 라이선스 전문 포함)을 담은 `target/dist/kabegami-kun-<버전>-x86_64-linux.tar.gz`(와 `.sha256`)를 만듭니다. 버전은 `Cargo.toml`에서 가져옵니다.
 
 ### 번역
 
@@ -313,7 +313,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 | `locales/*.yml` | 번역 (rust-i18n으로 빌드할 때 포함) |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | 사용한 라이브러리 (`scripts/gen-third-party.py`로 생성) |
 | `assets/icons/` | 앱 아이콘 (SVG, 그리고 `scripts/render-icon.py`로 만든 PNG) |
-| `assets/bing-wallpaper-manager.desktop` | 데스크톱 항목 (`scripts/install.sh`가 설치) |
+| `assets/kabegami-kun.desktop` | 데스크톱 항목 (`scripts/install.sh`가 설치) |
 | `scripts/rustc-stable` | cargo가 쓸 rustc를 rustup의 stable에서 고름 (‘2. Rust 설치’ 참고) |
 | `scripts/screenshot.sh` | 가상 디스플레이에서 스크린샷 촬영 |
 | `tools/vpointer/` | 스크린샷용 가상 마우스와 키보드 (별도 크레이트) |

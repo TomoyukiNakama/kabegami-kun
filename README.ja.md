@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 [English](README.md) | **日本語** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [한국어](README.ko.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | [Русский](README.ru.md)
 
@@ -109,7 +109,7 @@ Bing は、地域によって違う写真・題名・解説文を配信してい
 - **お気に入りから選ぶ**: 30 分・1 時間・3 時間・6 時間・1 日ごとに、お気に入りから毎回違う 1 枚を選びます
 - **保存した写真から選ぶ**: 同じ間隔で、保存したすべての写真から選びます。古い写真は、そのときに画像をダウンロードします
 
-スイッチを入れると、このアプリを `--apply` 付きで実行する systemd のユーザータイマー（`~/.config/systemd/user/bing-wallpaper-manager.timer` と `.service`）を作り、切ると消します。タイマーは今のアプリの場所を実行するので、アプリを別の場所に移したときは、スイッチを一度切って入れ直してください。
+スイッチを入れると、このアプリを `--apply` 付きで実行する systemd のユーザータイマー（`~/.config/systemd/user/kabegami-kun.timer` と `.service`）を作り、切ると消します。タイマーは今のアプリの場所を実行するので、アプリを別の場所に移したときは、スイッチを一度切って入れ直してください。
 
 ![スイッチを入れた自動更新の設定](docs/auto.ja.jpg)
 
@@ -143,10 +143,10 @@ Bing は、地域によって違う写真・題名・解説文を配信してい
 
 ### ビルド済みのパッケージ（x86_64）
 
-各[リリース](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest)に、Ubuntu 26.04 以降（glibc 2.43 以降）向けのビルド済みパッケージがあります。`bing-wallpaper-manager-<バージョン>-x86_64-linux.tar.gz` をダウンロードして、`~/.local` に展開します。
+各[リリース](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest)に、Ubuntu 26.04 以降（glibc 2.43 以降）向けのビルド済みパッケージがあります。`kabegami-kun-<バージョン>-x86_64-linux.tar.gz` をダウンロードして、`~/.local` に展開します。
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 ソースからビルドする場合は、次の手順に進んでください。
@@ -173,8 +173,8 @@ PATH の `cargo` を Ubuntu 標準のままにしておきたい場合も、そ�
 ### 3. ソースを取得する
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. ビルドしてインストールする
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-リリース版をビルドし、アプリ・アイコン・デスクトップ項目を `~/.local` に入れます。GNOME のアプリ一覧に「Bing 壁紙」が出ます（すぐに出ないときは、一度ログアウトしてログインし直してください）。`~/.local/bin` が PATH に入っていれば、ターミナルから `bing-wallpaper-manager` でも起動できます。初回のビルドは依存ライブラリをすべてダウンロードしてコンパイルするため、数分かかります。
+リリース版をビルドし、アプリ・アイコン・デスクトップ項目を `~/.local` に入れます。GNOME のアプリ一覧に「Kabegami-kun」が出ます（すぐに出ないときは、一度ログアウトしてログインし直してください）。`~/.local/bin` が PATH に入っていれば、ターミナルから `kabegami-kun` でも起動できます。初回のビルドは依存ライブラリをすべてダウンロードしてコンパイルするため、数分かかります。
 
-別の場所に入れるときは、`PREFIX=/opt/bing-wallpaper scripts/install.sh` のように `PREFIX` を指定します。
+別の場所に入れるときは、`PREFIX=/opt/kabegami-kun scripts/install.sh` のように `PREFIX` を指定します。
 
 ### 更新する
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-アプリ・アイコン・デスクトップ項目を削除します。設定（`~/.config/bing-wallpaper-manager/`）と保存した写真（保存先のフォルダ）は残るので、不要なら手で削除してください。
+アプリ・アイコン・デスクトップ項目を削除します。設定（`~/.config/kabegami-kun/`）と保存した写真（保存先のフォルダ）は残るので、不要なら手で削除してください。
 
 ### インストールせずに動かす
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## ファイル
 
-保存先は「設定」の「保存先」で変えられます（既定は `~/Pictures/BingWallpaper`、日本語環境では `~/ピクチャ/BingWallpaper`）。設定は `~/.config/bing-wallpaper-manager/config.json` に、ウィンドウの大きさなどは同じフォルダの `state.json` に保存されます。
+保存先は「設定」の「保存先」で変えられます（既定は `~/Pictures/kabegami-kun`、日本語環境では `~/ピクチャ/kabegami-kun`）。設定は `~/.config/kabegami-kun/config.json` に、ウィンドウの大きさなどは同じフォルダの `state.json` に保存されます。
 同じ写真は地域や配信日が違っても 1 枚だけ保存し、保存済みの画像は再ダウンロードしません。
 
 ```text
@@ -227,11 +227,11 @@ cargo run --release
 ## コマンドラインで使う
 
 ```sh
-bing-wallpaper-manager --apply                       # 今日の写真を壁紙にする
-bing-wallpaper-manager --apply --mkt en-US           # 地域を指定
-bing-wallpaper-manager --apply --if-new              # 前回と同じ写真なら何もしない
-bing-wallpaper-manager --apply --random              # 保存した写真から 1 枚選ぶ
-bing-wallpaper-manager --apply --random --favorites  # お気に入りから 1 枚選ぶ
+kabegami-kun --apply                       # 今日の写真を壁紙にする
+kabegami-kun --apply --mkt en-US           # 地域を指定
+kabegami-kun --apply --if-new              # 前回と同じ写真なら何もしない
+kabegami-kun --apply --random              # 保存した写真から 1 枚選ぶ
+kabegami-kun --apply --random --favorites  # お気に入りから 1 枚選ぶ
 ```
 
 `--mkt` を付けないときは、「自動更新」で選んだ地域（無ければ表示している最初の地域）を使います。ログイン直後などでネットワークがまだつながっていないときは、何度かやり直してから終了します。
@@ -241,8 +241,8 @@ bing-wallpaper-manager --apply --random --favorites  # お気に入りから 1 �
 **設定** → **自動更新** のスイッチを入れてください（[自動更新](#自動更新) を参照）。systemd のユーザータイマーをアプリが作ります。動いているかは次で確かめられます。
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 以前の版の手順で `bing-wallpaper.timer` を手で作っていた場合は、二重に動かないように止めてください: `systemctl --user disable --now bing-wallpaper.timer`
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### リリース用のパッケージ
 
-`scripts/package-release.sh` がリリース版をビルドし、アプリ本体・アイコン・デスクトップ項目・ライセンス類（使用ライブラリのライセンス本文を含む）を入れた `target/dist/bing-wallpaper-manager-<バージョン>-x86_64-linux.tar.gz` と `.sha256` を作ります。バージョンは `Cargo.toml` から取ります。
+`scripts/package-release.sh` がリリース版をビルドし、アプリ本体・アイコン・デスクトップ項目・ライセンス類（使用ライブラリのライセンス本文を含む）を入れた `target/dist/kabegami-kun-<バージョン>-x86_64-linux.tar.gz` と `.sha256` を作ります。バージョンは `Cargo.toml` から取ります。
 
 ### 翻訳
 
@@ -313,7 +313,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 | `locales/*.yml` | 翻訳ファイル（rust-i18n でビルド時に埋め込み） |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | 使用ライブラリの一覧（`scripts/gen-third-party.py` で生成） |
 | `assets/icons/` | アプリのアイコン（SVG と、`scripts/render-icon.py` で作る PNG） |
-| `assets/bing-wallpaper-manager.desktop` | デスクトップ項目（`scripts/install.sh` が入れる） |
+| `assets/kabegami-kun.desktop` | デスクトップ項目（`scripts/install.sh` が入れる） |
 | `scripts/rustc-stable` | cargo が使う rustc を rustup の stable から選ぶ（「2. Rust を入れる」参照） |
 | `scripts/screenshot.sh` | 仮想ディスプレイでのスクリーンショット撮影 |
 | `tools/vpointer/` | 撮影時に操作を送る仮想マウス・キーボード（別プロジェクト） |

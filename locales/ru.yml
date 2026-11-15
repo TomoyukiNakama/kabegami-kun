@@ -1,4 +1,4 @@
-# ru: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# ru: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "Используемые библиотеки (%{count})"
 about.libraries_note: "Нажмите на библиотеку, чтобы открыть её страницу. Список также есть в THIRD_PARTY_LICENSES.md."
@@ -20,7 +20,7 @@ action.search_tooltip: "Поиск (Ctrl+F)"
 action.set_wallpaper: "Сделать обоями"
 action.settings_tooltip: "Настройки (Ctrl+,)"
 action.show_in_folder: "Показать в папке"
-app.name: "Обои Bing"
+app.name: "Kabegami-kun"
 auto.desc: "Меняет обои автоматически, даже когда приложение закрыто. Используется пользовательский таймер systemd."
 auto.favorites: "Из избранного"
 auto.favorites_desc: "Каждый раз выбирает другое избранное фото."
@@ -40,7 +40,7 @@ cli.error: "Ошибка"
 cli.no_favorites: "Нет избранных фото"
 cli.no_photos: "Нет сохранённых фото"
 cli.retrying: "Повтор через %{seconds} с"
-cli.usage: "Использование:\n  bing-wallpaper-manager                                  Открыть панель\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  Установить фото дня как обои и выйти (--if-new: ничего не делать, если фото то же, что в прошлый раз)\n  bing-wallpaper-manager --apply --random [--favorites]   Установить как обои случайное сохранённое фото (--favorites: из избранного)"
+cli.usage: "Использование:\n  kabegami-kun                                  Открыть панель\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  Установить фото дня как обои и выйти (--if-new: ничего не делать, если фото то же, что в прошлый раз)\n  kabegami-kun --apply --random [--favorites]   Установить как обои случайное сохранённое фото (--favorites: из избранного)"
 cli.wallpaper_set: "Обои установлены"
 color.black: "Чёрный"
 color.blue: "Синий"

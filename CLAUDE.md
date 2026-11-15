@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Ubuntu 26.04（GNOME）向けの Bing 壁紙アプリ。Rust + gpui-kit。UI・メッセージは日本語。
+Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日替わり写真を壁紙にする。旧名 bing-wallpaper-manager）。Rust + gpui-kit。UI・メッセージは日本語。
 
 ## ビルド環境（必ず守る）
 
@@ -63,6 +63,10 @@ Ubuntu 26.04（GNOME）向けの Bing 壁紙アプリ。Rust + gpui-kit。UI・�
 - `src/bing.rs` Bing API・ダウンロード / `src/library.rs` 保存先への保管 / `src/config.rs` 設定 /
   `src/theme.rs` 配色とフォント / `src/wallpaper.rs` gsettings / `src/main.rs` UI と CLI（`--apply`） /
   `src/info.rs` 写真の情報のパネル / `src/schedule.rs` 自動更新（systemd のユーザータイマー） / `src/single.rs` 二重起動の防止
+- アプリ名は以前 bing-wallpaper-manager だった。その頃の設定フォルダ（`~/.config/bing-wallpaper-manager`）は起動時に新しい名前へ複製し
+  （`config::migrate_legacy`）、古い名前のタイマーは消して作り直す（`schedule::migrate_legacy`）。
+  既定の保存先は `~/Pictures/kabegami-kun` だが、以前の `~/Pictures/BingWallpaper` があればそれを使う。
+  保存先の中の `.bing-wallpaper/`（メタデータ）と、環境変数の `BWM_*` は以前の名前のまま。作業フォルダ名も変えていない。
 - 地域は `bing::MARKETS`（Bing が地域ごとの写真を配信しているものだけ）から設定で選ぶ。ダッシュボードは `Dashboard::markets`
   （選んだ地域）を使い、`MARKETS` を直接回さない。地域を足すときは `region.xx_yy` の訳も全言語に足す。
 - 古い写真の読み込み（`load_older`）は、いちばん古い写真より前の約 1 か月分と、途中の抜け（地域を足したあとなど）を読み込む
@@ -104,11 +108,11 @@ Ubuntu 26.04（GNOME）向けの Bing 壁紙アプリ。Rust + gpui-kit。UI・�
   - ほかの画像（`browse`・`jump`・`delete`・`info`・`search-words`・`search-color`）は英語と日本語だけで、ほかの言語の README は英語の画像を使う。
   - README 用は `FLOAT=1280x840 BG=<表示中の写真の UHD 画像>` で、壁紙の上に浮かせたウィンドウとして 1440x980 で撮る
     （手順は README の「Development」→「Screenshots」に例がある）。
-  - 保存先のページにはフォルダのパスが写る。作業フォルダのパスを出さないよう、`STORE=/tmp/Pictures/BingWallpaper`（撮影用の保存先の複製）で撮る。
+  - 保存先のページにはフォルダのパスが写る。作業フォルダのパスを出さないよう、`STORE=/tmp/Pictures/kabegami-kun`（撮影用の保存先の複製）で撮る。
   - 言語によって説明文の行数が変わり、設定のスイッチや選択肢の位置がずれる。撮ったら全言語を並べて確かめる。
 - `locales/*.yml` だけを変えてもビルドし直されないことがある。訳を変えたら `touch src/i18n.rs` してからビルドする。
-- アイコンは `assets/icons/bing-wallpaper-manager.svg` が元。変えたら `python3 scripts/render-icon.py` で PNG を作り直す。
-  ウィンドウの app_id と `.desktop` のファイル名（`bing-wallpaper-manager`）は一致させる（GNOME がアイコンを結び付ける）。
+- アイコンは `assets/icons/kabegami-kun.svg` が元。変えたら `python3 scripts/render-icon.py` で PNG を作り直す。
+  ウィンドウの app_id と `.desktop` のファイル名（`kabegami-kun`）は一致させる（GNOME がアイコンを結び付ける）。
 - 一覧は gpui の `list`（仮想リスト）で、見えている行だけを描く。写真を日付ごとにまとめて、ウィンドウ幅に収まる行（`ListItem`）に詰める。
   写真が数百枚になるので、描画中に呼ぶ処理でファイルの有無を確かめたり（`is_file`）、全件を線形に探したりしない（`stored_index` を使う）。
 - 検索（`src/search.rs`）は保存済みの写真のメタデータだけを対象にする。解説文は最初の検索時にアーカイブから補い、
@@ -118,7 +122,7 @@ Ubuntu 26.04（GNOME）向けの Bing 壁紙アプリ。Rust + gpui-kit。UI・�
 
 1. `Cargo.toml` の version を上げる（「このアプリについて」に出る）。
 2. `scripts/package-release.sh` で `target/dist/` にパッケージと `.sha256` を作る（使用ライブラリのライセンス本文も同梱される）。
-3. パッケージを一時フォルダに展開し、`BIN=<展開先>/bin/bing-wallpaper-manager scripts/screenshot.sh ...` で起動を確認する。
+3. パッケージを一時フォルダに展開し、`BIN=<展開先>/bin/kabegami-kun scripts/screenshot.sh ...` で起動を確認する。
 4. コミット・push してから `gh release create v<version> --target main --notes-file ... <tar.gz> <tar.gz.sha256>`。
    リリースノートは英語で書き、日本語の説明も付ける。v0.1.0 との差分は `git fetch --tags` してから `git log v<前>..HEAD`。
 5. 公開された URL からダウンロードし、`sha256sum -c` が通ることを確かめる（作成直後は 504 になることがある）。

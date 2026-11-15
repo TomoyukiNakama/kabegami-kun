@@ -1,8 +1,8 @@
 [package]
-name = "bing-wallpaper-manager"
-version = "0.3.0"
+name = "kabegami-kun"
+version = "0.4.0"
 edition = "2024"
-description = "Ubuntu (GNOME) 向けの Bing 壁紙アプリ"
+description = "Bing の日替わり写真を GNOME の壁紙にする Ubuntu 向けのアプリ"
 license = "MIT OR Apache-2.0"
 authors = ["Tomoyuki Nakama"]
 

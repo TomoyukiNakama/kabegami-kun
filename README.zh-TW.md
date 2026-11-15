@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 [English](README.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | **繁體中文** | [한국어](README.ko.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | [Русский](README.ru.md)
 
@@ -109,7 +109,7 @@ Bing 在不同地區展示的相片、標題和說明各不相同。在這裡選
 - **從我的最愛選擇**：每 30 分鐘、每小時、每 3 小時、每 6 小時或每天，從最愛中選一張不同的相片
 - **從已儲存的相片選擇**：同上，但從所有已儲存的相片中選擇。較舊的相片會在選中時下載
 
-開啟開關會建立一個 systemd 使用者計時器（`~/.config/systemd/user/bing-wallpaper-manager.timer` 和 `.service`），由它以 `--apply` 執行本應用程式；關閉開關則會移除計時器。計時器會從應用程式目前所在的位置執行它，因此移動應用程式後請把開關關閉再重新開啟。
+開啟開關會建立一個 systemd 使用者計時器（`~/.config/systemd/user/kabegami-kun.timer` 和 `.service`），由它以 `--apply` 執行本應用程式；關閉開關則會移除計時器。計時器會從應用程式目前所在的位置執行它，因此移動應用程式後請把開關關閉再重新開啟。
 
 ![已開啟開關的自動更新設定](docs/auto.zh-TW.jpg)
 
@@ -143,10 +143,10 @@ Bing 在不同地區展示的相片、標題和說明各不相同。在這裡選
 
 ### 預先建置的二進位檔（x86_64）
 
-每個[發行版本](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest)都提供適用於 Ubuntu 26.04 或更新版本（glibc 2.43+）的預先建置套件。下載 `bing-wallpaper-manager-<版本>-x86_64-linux.tar.gz` 並解壓縮到 `~/.local`：
+每個[發行版本](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest)都提供適用於 Ubuntu 26.04 或更新版本（glibc 2.43+）的預先建置套件。下載 `kabegami-kun-<版本>-x86_64-linux.tar.gz` 並解壓縮到 `~/.local`：
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 如果想從原始碼建置，請依照下列步驟操作。
@@ -173,8 +173,8 @@ source "$HOME/.cargo/env"   # 或是開啟新的終端機
 ### 3. 取得原始碼
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. 建置並安裝
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-該指令碼會建置發行版本，並將應用程式、圖示和桌面項目安裝到 `~/.local` 下。之後 *Bing 桌布*會出現在 GNOME 的應用程式清單中（如果沒有馬上出現，請登出後重新登入）；如果 `~/.local/bin` 在 PATH 中，還可以在終端機中用 `bing-wallpaper-manager` 啟動。首次建置需要下載並編譯所有相依套件，要花幾分鐘。
+該指令碼會建置發行版本，並將應用程式、圖示和桌面項目安裝到 `~/.local` 下。之後 *Kabegami-kun* 會出現在 GNOME 的應用程式清單中（如果沒有馬上出現，請登出後重新登入）；如果 `~/.local/bin` 在 PATH 中，還可以在終端機中用 `kabegami-kun` 啟動。首次建置需要下載並編譯所有相依套件，要花幾分鐘。
 
-要安裝到其他位置，請設定 `PREFIX`，例如 `PREFIX=/opt/bing-wallpaper scripts/install.sh`。
+要安裝到其他位置，請設定 `PREFIX`，例如 `PREFIX=/opt/kabegami-kun scripts/install.sh`。
 
 ### 更新
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-該命令會移除應用程式、圖示和桌面項目。您的設定（`~/.config/bing-wallpaper-manager/`）和已儲存的相片（儲存資料夾）會保留；如果不再需要，請自行刪除。
+該命令會移除應用程式、圖示和桌面項目。您的設定（`~/.config/kabegami-kun/`）和已儲存的相片（儲存資料夾）會保留；如果不再需要，請自行刪除。
 
 ### 不安裝直接執行
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## 檔案
 
-在*設定 → 儲存*中選擇儲存資料夾（預設：`~/Pictures/BingWallpaper`，或在地化的「圖片」資料夾）。設定儲存在 `~/.config/bing-wallpaper-manager/config.json` 中，應用程式記住的狀態（如視窗大小）儲存在同一資料夾的 `state.json` 中。
+在*設定 → 儲存*中選擇儲存資料夾（預設：`~/Pictures/kabegami-kun`，或在地化的「圖片」資料夾）。設定儲存在 `~/.config/kabegami-kun/config.json` 中，應用程式記住的狀態（如視窗大小）儲存在同一資料夾的 `state.json` 中。
 同一張相片即使在多個地區或不同日期展示，也只儲存一次；已儲存的圖片不會再次下載。
 
 ```text
@@ -227,11 +227,11 @@ cargo run --release
 ## 命令列
 
 ```sh
-bing-wallpaper-manager --apply                       # 將今日相片設為桌布
-bing-wallpaper-manager --apply --mkt en-US           # 指定地區
-bing-wallpaper-manager --apply --if-new              # 與上次是同一張相片則不動作
-bing-wallpaper-manager --apply --random              # 隨機選一張已儲存的相片
-bing-wallpaper-manager --apply --random --favorites  # 隨機選一張最愛的相片
+kabegami-kun --apply                       # 將今日相片設為桌布
+kabegami-kun --apply --mkt en-US           # 指定地區
+kabegami-kun --apply --if-new              # 與上次是同一張相片則不動作
+kabegami-kun --apply --random              # 隨機選一張已儲存的相片
+kabegami-kun --apply --random --favorites  # 隨機選一張最愛的相片
 ```
 
 未指定 `--mkt` 時，使用在*自動更新*中選擇的地區（否則使用顯示的第一個地區）。如果網路尚未就緒（例如剛登入時），`--apply` 會重試幾次後才放棄。
@@ -241,8 +241,8 @@ bing-wallpaper-manager --apply --random --favorites  # 隨機選一張最愛的�
 在**設定** → **自動更新**中開啟開關（請參閱[自動更新](#自動更新)），應用程式會為您設定好 systemd 使用者計時器。可用下列命令查看其狀態：
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 如果您曾在舊版本中手動建立過 `bing-wallpaper.timer`，請將其停用，以免兩個計時器同時執行：`systemctl --user disable --now bing-wallpaper.timer`。
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### 發行套件
 
-`scripts/package-release.sh` 會建置發行版本，並產生 `target/dist/bing-wallpaper-manager-<版本>-x86_64-linux.tar.gz`（及其 `.sha256`），其中包含二進位檔、圖示、桌面項目和授權檔案，以及所有內含程式庫的授權條款全文。版本號碼取自 `Cargo.toml`。
+`scripts/package-release.sh` 會建置發行版本，並產生 `target/dist/kabegami-kun-<版本>-x86_64-linux.tar.gz`（及其 `.sha256`），其中包含二進位檔、圖示、桌面項目和授權檔案，以及所有內含程式庫的授權條款全文。版本號碼取自 `Cargo.toml`。
 
 ### 翻譯
 
@@ -313,7 +313,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 | `locales/*.yml` | 翻譯（建置時由 rust-i18n 內嵌） |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | 使用的程式庫（由 `scripts/gen-third-party.py` 產生） |
 | `assets/icons/` | 應用程式圖示（SVG，以及由 `scripts/render-icon.py` 轉出的 PNG） |
-| `assets/bing-wallpaper-manager.desktop` | 桌面項目（由 `scripts/install.sh` 安裝） |
+| `assets/kabegami-kun.desktop` | 桌面項目（由 `scripts/install.sh` 安裝） |
 | `scripts/rustc-stable` | 為 cargo 選用 rustup 的 stable rustc（請參閱「2. 安裝 Rust」） |
 | `scripts/screenshot.sh` | 在虛擬顯示器上截圖 |
 | `tools/vpointer/` | 截圖用的虛擬滑鼠和鍵盤（獨立的 crate） |

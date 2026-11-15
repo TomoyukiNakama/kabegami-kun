@@ -1,4 +1,4 @@
-//! 設定ファイル (`~/.config/bing-wallpaper-manager/config.json`)。
+//! 設定ファイル (`~/.config/kabegami-kun/config.json`)。
 
 use std::fs;
 use std::path::PathBuf;
@@ -12,7 +12,7 @@ pub use crate::theme::ThemePref;
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct Config {
-    /// 画像の保存先。未設定なら `~/Pictures/BingWallpaper`。
+    /// 画像の保存先。未設定なら `~/Pictures/kabegami-kun`。
     #[serde(default)]
     pub save_dir: Option<PathBuf>,
     /// 写真とモニターの縦横比が違うときの合わせ方。
@@ -196,15 +196,42 @@ impl FitMode {
     }
 }
 
+/// 設定フォルダの名前。
+const APP_DIR: &str = "kabegami-kun";
+/// 名前を変える前（bing-wallpaper-manager）の設定フォルダ。
+const LEGACY_APP_DIR: &str = "bing-wallpaper-manager";
+/// 名前を変える前の、既定の保存先のフォルダ名。
+const LEGACY_SAVE_DIR: &str = "BingWallpaper";
+
 fn config_dir() -> PathBuf {
-    dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("bing-wallpaper-manager")
+    dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join(APP_DIR)
+}
+
+/// 以前の名前のときの設定を引き継ぐ。新しい設定フォルダがまだ無いときに、古いフォルダの中身を写す
+/// （古い版も動かせるよう、移動ではなく複製する）。
+pub fn migrate_legacy() {
+    let Some(base) = dirs::config_dir() else { return };
+    migrate_legacy_in(&base);
+}
+
+fn migrate_legacy_in(base: &std::path::Path) {
+    let (old, new) = (base.join(LEGACY_APP_DIR), base.join(APP_DIR));
+    if new.exists() || !old.is_dir() {
+        return;
+    }
+    if fs::create_dir_all(&new).is_err() {
+        return;
+    }
+    for name in ["config.json", "state.json"] {
+        let _ = fs::copy(old.join(name), new.join(name));
+    }
 }
 
 fn config_path() -> PathBuf {
     config_dir().join("config.json")
 }
 
-/// 設定ではない、アプリが覚えておく状態（`~/.config/bing-wallpaper-manager/state.json`）。
+/// 設定ではない、アプリが覚えておく状態（`~/.config/kabegami-kun/state.json`）。
 #[derive(Debug, Default, Clone, PartialEq, Serialize, Deserialize)]
 pub struct State {
     /// 前回のウィンドウの大きさ（幅, 高さ）。
@@ -242,10 +269,12 @@ impl State {
 }
 
 pub fn default_save_dir() -> PathBuf {
-    dirs::picture_dir()
+    let base = dirs::picture_dir()
         .or_else(|| dirs::home_dir().map(|h| h.join("Pictures")))
-        .unwrap_or_else(std::env::temp_dir)
-        .join("BingWallpaper")
+        .unwrap_or_else(std::env::temp_dir);
+    // 名前を変える前から使っている人の写真は、そのままの場所で使う
+    let legacy = base.join(LEGACY_SAVE_DIR);
+    if legacy.is_dir() { legacy } else { base.join(APP_DIR) }
 }
 
 impl Config {
@@ -299,6 +328,25 @@ impl Config {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn legacy_settings_are_copied_once() {
+        let base = std::env::temp_dir().join(format!("kabegami-kun-test-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&base);
+        let old = base.join(LEGACY_APP_DIR);
+        fs::create_dir_all(&old).unwrap();
+        fs::write(old.join("config.json"), r#"{"theme":"dark"}"#).unwrap();
+
+        migrate_legacy_in(&base);
+        let new = base.join(APP_DIR);
+        assert_eq!(fs::read_to_string(new.join("config.json")).unwrap(), r#"{"theme":"dark"}"#);
+        // 古い設定は残し、新しい設定があれば上書きしない
+        assert!(old.join("config.json").exists());
+        fs::write(new.join("config.json"), "{}").unwrap();
+        migrate_legacy_in(&base);
+        assert_eq!(fs::read_to_string(new.join("config.json")).unwrap(), "{}");
+        let _ = fs::remove_dir_all(&base);
+    }
 
     #[test]
     fn markets_fall_back_to_default() {

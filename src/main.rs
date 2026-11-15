@@ -45,7 +45,7 @@ use settings::SettingsView;
 use theme::Palette;
 
 gpui_kit::actions!(
-    bing_wallpaper,
+    kabegami_kun,
     [
         SelectPrevious,
         SelectNext,
@@ -2907,6 +2907,8 @@ fn run_cli(args: &[String]) -> anyhow::Result<()> {
 }
 
 fn main() {
+    // 名前を変える前（bing-wallpaper-manager）の設定を引き継ぐ
+    config::migrate_legacy();
     let config = Config::load();
     // BWM_LANG=de などで表示言語を固定できる（撮影・確認用）
     let language = std::env::var("BWM_LANG")
@@ -2931,6 +2933,11 @@ fn main() {
         return;
     }
 
+    // 以前の名前の自動更新のタイマーが残っていたら、今の名前で作り直す
+    if let Err(err) = schedule::migrate_legacy(&config.auto, &config.auto_market()) {
+        eprintln!("{err:#}");
+    }
+
     // すでに起動していたら、そのウィンドウを前に出してもらって終了する
     let wake = match single::acquire() {
         single::Instance::AlreadyRunning => return,
@@ -2952,7 +2959,7 @@ fn main() {
                     cx,
                 )),
                 window_min_size: Some(size(px(820.), px(560.))),
-                app_id: Some("bing-wallpaper-manager".into()),
+                app_id: Some("kabegami-kun".into()),
                 // 枠はこのアプリが描く（角を丸くし、タイトルバーを大きな写真に重ねるため）
                 window_decorations: Some(WindowDecorations::Client),
                 ..gpui_kit::component::TitleBar::window_options()

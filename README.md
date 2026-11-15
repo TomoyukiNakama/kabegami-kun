@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 **English** | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [한국어](README.ko.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | [Русский](README.ru.md)
 
@@ -109,7 +109,7 @@ Turn on the switch to have the wallpaper change by itself, even when the app is 
 - **From favorites**: picks a different favorite each time, every 30 minutes, hour, 3 hours, 6 hours or day
 - **From saved photos**: the same, from everything you have saved. Older photos are downloaded when they are picked
 
-The switch creates a systemd user timer (`~/.config/systemd/user/bing-wallpaper-manager.timer` and `.service`) that runs this app with `--apply`, and turning it off removes the timer. The timer runs the app from where it is now, so turn the switch off and on again if you move the app.
+The switch creates a systemd user timer (`~/.config/systemd/user/kabegami-kun.timer` and `.service`) that runs this app with `--apply`, and turning it off removes the timer. The timer runs the app from where it is now, so turn the switch off and on again if you move the app.
 
 ![Automatic update settings with the switch turned on](docs/auto.jpg)
 
@@ -143,10 +143,10 @@ Thanks to both projects. All other libraries are listed in [THIRD_PARTY_LICENSES
 
 ### Prebuilt binary (x86_64)
 
-Each [release](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest) has a prebuilt package for Ubuntu 26.04 or newer (glibc 2.43+). Download `bing-wallpaper-manager-<version>-x86_64-linux.tar.gz` and extract it into `~/.local`:
+Each [release](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest) has a prebuilt package for Ubuntu 26.04 or newer (glibc 2.43+). Download `kabegami-kun-<version>-x86_64-linux.tar.gz` and extract it into `~/.local`:
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 To build from source instead, follow the steps below.
@@ -173,8 +173,8 @@ If you prefer to keep Ubuntu’s own `cargo` on your PATH, that works too: `.car
 ### 3. Get the source
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. Build and install
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-This builds the release version and installs the app, its icon and a desktop entry under `~/.local`. *Bing Wallpaper* then appears in the GNOME app grid (log out and back in if it does not show up right away), and `bing-wallpaper-manager` can be started from a terminal if `~/.local/bin` is on your PATH. The first build downloads and compiles all dependencies and takes several minutes.
+This builds the release version and installs the app, its icon and a desktop entry under `~/.local`. *Kabegami-kun* then appears in the GNOME app grid (log out and back in if it does not show up right away), and `kabegami-kun` can be started from a terminal if `~/.local/bin` is on your PATH. The first build downloads and compiles all dependencies and takes several minutes.
 
-To install somewhere else, set `PREFIX`, for example `PREFIX=/opt/bing-wallpaper scripts/install.sh`.
+To install somewhere else, set `PREFIX`, for example `PREFIX=/opt/kabegami-kun scripts/install.sh`.
 
 ### Update
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-This removes the app, icon and desktop entry. Your settings (`~/.config/bing-wallpaper-manager/`) and saved photos (the storage folder) are kept; delete them yourself if you no longer need them.
+This removes the app, icon and desktop entry. Your settings (`~/.config/kabegami-kun/`) and saved photos (the storage folder) are kept; delete them yourself if you no longer need them.
 
 ### Run without installing
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## Files
 
-Choose the storage folder under *Settings → Storage* (default: `~/Pictures/BingWallpaper`, or the localized Pictures folder). Settings are saved to `~/.config/bing-wallpaper-manager/config.json`, and things the app remembers (such as the window size) to `state.json` in the same folder.
+Choose the storage folder under *Settings → Storage* (default: `~/Pictures/kabegami-kun`, or the localized Pictures folder). Settings are saved to `~/.config/kabegami-kun/config.json`, and things the app remembers (such as the window size) to `state.json` in the same folder.
 A photo is saved only once even if it is shown in several regions or on different days, and saved images are never downloaded again.
 
 ```text
@@ -227,11 +227,11 @@ A photo is saved only once even if it is shown in several regions or on differen
 ## Command line
 
 ```sh
-bing-wallpaper-manager --apply                       # set today’s photo as the wallpaper
-bing-wallpaper-manager --apply --mkt en-US           # choose the region
-bing-wallpaper-manager --apply --if-new              # do nothing if it is the same photo as last time
-bing-wallpaper-manager --apply --random              # set a random saved photo
-bing-wallpaper-manager --apply --random --favorites  # set a random favorite
+kabegami-kun --apply                       # set today’s photo as the wallpaper
+kabegami-kun --apply --mkt en-US           # choose the region
+kabegami-kun --apply --if-new              # do nothing if it is the same photo as last time
+kabegami-kun --apply --random              # set a random saved photo
+kabegami-kun --apply --random --favorites  # set a random favorite
 ```
 
 Without `--mkt`, the region chosen under *Automatic updates* is used (or the first region shown). If the network is not up yet, for example right after logging in, `--apply` retries a few times before giving up.
@@ -241,8 +241,8 @@ Without `--mkt`, the region chosen under *Automatic updates* is used (or the fir
 Turn on the switch under **Settings** → **Automatic updates** (see [Automatic updates](#automatic-updates)); it sets up the systemd user timer for you. To check on it:
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 If you created `bing-wallpaper.timer` by hand with an earlier version, disable it so the two do not both run: `systemctl --user disable --now bing-wallpaper.timer`.
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### Release packages
 
-`scripts/package-release.sh` builds the release version and creates `target/dist/bing-wallpaper-manager-<version>-x86_64-linux.tar.gz` (and its `.sha256`) with the binary, icons, desktop entry and license files, including the license texts of all bundled libraries. The version comes from `Cargo.toml`.
+`scripts/package-release.sh` builds the release version and creates `target/dist/kabegami-kun-<version>-x86_64-linux.tar.gz` (and its `.sha256`) with the binary, icons, desktop entry and license files, including the license texts of all bundled libraries. The version comes from `Cargo.toml`.
 
 ### Translations
 
@@ -313,7 +313,7 @@ Strings live in `locales/<language>.yml` (`ja`, `en`, `zh-CN`, `zh-TW`, `ko`, `d
 | `locales/*.yml` | Translations (embedded at build time with rust-i18n) |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | Libraries used (generated by `scripts/gen-third-party.py`) |
 | `assets/icons/` | App icon (SVG, and PNGs rendered by `scripts/render-icon.py`) |
-| `assets/bing-wallpaper-manager.desktop` | Desktop entry (installed by `scripts/install.sh`) |
+| `assets/kabegami-kun.desktop` | Desktop entry (installed by `scripts/install.sh`) |
 | `scripts/rustc-stable` | Picks the rustup stable rustc for cargo (see “2. Install Rust”) |
 | `scripts/screenshot.sh` | Screenshots on a virtual display |
 | `tools/vpointer/` | Virtual mouse and keyboard for screenshots (separate crate) |

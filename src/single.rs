@@ -1,6 +1,6 @@
 //! 二重起動の防止。
 //!
-//! 最初に起動したアプリが `$XDG_RUNTIME_DIR/bing-wallpaper-manager.sock` で待ち受ける。
+//! 最初に起動したアプリが `$XDG_RUNTIME_DIR/kabegami-kun.sock` で待ち受ける。
 //! あとから起動したアプリは、そこへ知らせを送って終了し、最初のアプリがウィンドウを前に出す。
 
 use std::io::Write as _;
@@ -9,7 +9,7 @@ use std::path::PathBuf;
 use std::sync::mpsc::{Receiver, channel};
 
 fn socket_path() -> Option<PathBuf> {
-    Some(dirs::runtime_dir()?.join("bing-wallpaper-manager.sock"))
+    Some(dirs::runtime_dir()?.join("kabegami-kun.sock"))
 }
 
 pub enum Instance {

@@ -24,14 +24,14 @@ cd "$(dirname "$0")/.."
 OUT=${1:-target/screenshot.png}
 WAIT=${2:-15}
 SIZE=${3:-1440x960}
-BIN=${BIN:-target/release/bing-wallpaper-manager}
+BIN=${BIN:-target/release/kabegami-kun}
 
 # 撮影用の設定と保存先（画像は再利用するので target/ 以下に残す）
 FIXTURE=$PWD/target/screenshot-fixture
 # STORE で保存先を差し替えられる（大量の写真での動作確認など）
 STORE=${STORE:-$FIXTURE/store}
-mkdir -p "$FIXTURE/config/bing-wallpaper-manager" "$STORE"
-printf '{"save_dir": "%s"}\n' "$STORE" > "$FIXTURE/config/bing-wallpaper-manager/config.json"
+mkdir -p "$FIXTURE/config/kabegami-kun" "$STORE"
+printf '{"save_dir": "%s"}\n' "$STORE" > "$FIXTURE/config/kabegami-kun/config.json"
 
 RUNTIME=$(mktemp -d)
 chmod 700 "$RUNTIME"
@@ -54,7 +54,7 @@ if [[ -n ${FLOAT:-} ]]; then
     if [[ -n ${BG:-} ]]; then BACKGROUND="$(realpath "$BG") fill"; else BACKGROUND="#6a7f8c solid_color"; fi
     cat >> "$RUNTIME/sway.conf" <<EOF
 output HEADLESS-1 bg $BACKGROUND
-for_window [app_id="bing-wallpaper-manager"] floating enable, resize set ${FLOAT%x*} ${FLOAT#*x}, move position center
+for_window [app_id="kabegami-kun"] floating enable, resize set ${FLOAT%x*} ${FLOAT#*x}, move position center
 EOF
 fi
 

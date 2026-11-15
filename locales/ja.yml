@@ -1,4 +1,4 @@
-# ja: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# ja: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "使用しているライブラリ（%{count} 件）"
 about.libraries_note: "クリックするとそのライブラリのページを開きます。一覧は THIRD_PARTY_LICENSES.md にもあります。"
@@ -20,7 +20,7 @@ action.search_tooltip: "検索（Ctrl+F）"
 action.set_wallpaper: "壁紙にする"
 action.settings_tooltip: "設定（Ctrl+,）"
 action.show_in_folder: "フォルダで表示"
-app.name: "Bing 壁紙"
+app.name: "Kabegami-kun"
 auto.desc: "アプリを閉じていても、壁紙を自動で変えます。systemd のユーザータイマーを使います。"
 auto.favorites: "お気に入りから選ぶ"
 auto.favorites_desc: "お気に入りの写真から、毎回違う 1 枚を選びます。"
@@ -40,7 +40,7 @@ cli.error: "エラー"
 cli.no_favorites: "お気に入りの写真がありません"
 cli.no_photos: "保存した写真がありません"
 cli.retrying: "%{seconds} 秒後にやり直します"
-cli.usage: "使い方:\n  bing-wallpaper-manager                                  ダッシュボードを開く\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  今日の写真を壁紙にして終了（--if-new: 前回と同じ写真なら何もしない）\n  bing-wallpaper-manager --apply --random [--favorites]   保存した写真（--favorites: お気に入り）から 1 枚選んで壁紙にする"
+cli.usage: "使い方:\n  kabegami-kun                                  ダッシュボードを開く\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  今日の写真を壁紙にして終了（--if-new: 前回と同じ写真なら何もしない）\n  kabegami-kun --apply --random [--favorites]   保存した写真（--favorites: お気に入り）から 1 枚選んで壁紙にする"
 cli.wallpaper_set: "壁紙にしました"
 color.black: "黒"
 color.blue: "青"

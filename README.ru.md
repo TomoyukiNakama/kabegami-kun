@@ -1,6 +1,6 @@
-<img src="assets/icons/hicolor/128x128/apps/bing-wallpaper-manager.png" alt="" width="96" align="right">
+<img src="assets/icons/hicolor/128x128/apps/kabegami-kun.png" alt="" width="96" align="right">
 
-# Bing Wallpaper Manager
+# Kabegami-kun
 
 [English](README.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [한국어](README.ko.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (Brasil)](README.pt-BR.md) | **Русский**
 
@@ -109,7 +109,7 @@
 - **Из избранного**: каждый раз выбирает другое избранное фото — каждые 30 минут, каждый час, каждые 3 часа, каждые 6 часов или каждый день
 - **Из сохранённых фото**: то же самое, но из всех сохранённых фото. Старые фото скачиваются в момент выбора
 
-Переключатель создаёт пользовательский таймер systemd (`~/.config/systemd/user/bing-wallpaper-manager.timer` и `.service`), который запускает это приложение с `--apply`, а при выключении таймер удаляется. Таймер запускает приложение из того места, где оно находится сейчас, поэтому, если вы переместите приложение, выключите и снова включите переключатель.
+Переключатель создаёт пользовательский таймер systemd (`~/.config/systemd/user/kabegami-kun.timer` и `.service`), который запускает это приложение с `--apply`, а при выключении таймер удаляется. Таймер запускает приложение из того места, где оно находится сейчас, поэтому, если вы переместите приложение, выключите и снова включите переключатель.
 
 ![Настройки автообновления с включённым переключателем](docs/auto.ru.jpg)
 
@@ -143,10 +143,10 @@
 
 ### Готовая сборка (x86_64)
 
-К каждому [релизу](https://github.com/TomoyukiNakama/bing-wallpaper-manager/releases/latest) прилагается готовый пакет для Ubuntu 26.04 и новее (glibc 2.43+). Скачайте `bing-wallpaper-manager-<version>-x86_64-linux.tar.gz` и распакуйте его в `~/.local`:
+К каждому [релизу](https://github.com/TomoyukiNakama/kabegami-kun/releases/latest) прилагается готовый пакет для Ubuntu 26.04 и новее (glibc 2.43+). Скачайте `kabegami-kun-<version>-x86_64-linux.tar.gz` и распакуйте его в `~/.local`:
 
 ```sh
-tar -xzf bing-wallpaper-manager-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
+tar -xzf kabegami-kun-*-x86_64-linux.tar.gz -C ~/.local --strip-components=1
 ```
 
 Чтобы собрать приложение из исходного кода, выполните шаги ниже.
@@ -173,8 +173,8 @@ source "$HOME/.cargo/env"   # или откройте новый термина�
 ### 3. Получите исходный код
 
 ```sh
-git clone https://github.com/TomoyukiNakama/bing-wallpaper-manager.git
-cd bing-wallpaper-manager
+git clone https://github.com/TomoyukiNakama/kabegami-kun.git
+cd kabegami-kun
 ```
 
 ### 4. Соберите и установите
@@ -183,9 +183,9 @@ cd bing-wallpaper-manager
 scripts/install.sh
 ```
 
-Скрипт собирает релизную версию и устанавливает приложение, его значок и ярлык для рабочего стола в `~/.local`. После этого *Обои Bing* появятся в сетке приложений GNOME (если этого не произошло сразу, выйдите из системы и войдите снова), а `bing-wallpaper-manager` можно будет запускать из терминала, если `~/.local/bin` есть в PATH. При первой сборке скачиваются и компилируются все зависимости, это занимает несколько минут.
+Скрипт собирает релизную версию и устанавливает приложение, его значок и ярлык для рабочего стола в `~/.local`. После этого *Kabegami-kun* появится в сетке приложений GNOME (если этого не произошло сразу, выйдите из системы и войдите снова), а `kabegami-kun` можно будет запускать из терминала, если `~/.local/bin` есть в PATH. При первой сборке скачиваются и компилируются все зависимости, это занимает несколько минут.
 
-Чтобы установить приложение в другое место, задайте `PREFIX`, например `PREFIX=/opt/bing-wallpaper scripts/install.sh`.
+Чтобы установить приложение в другое место, задайте `PREFIX`, например `PREFIX=/opt/kabegami-kun scripts/install.sh`.
 
 ### Обновление
 
@@ -202,7 +202,7 @@ scripts/install.sh
 scripts/install.sh --uninstall
 ```
 
-Команда удаляет приложение, значок и ярлык для рабочего стола. Настройки (`~/.config/bing-wallpaper-manager/`) и сохранённые фото (папка хранения) остаются; удалите их сами, если они больше не нужны.
+Команда удаляет приложение, значок и ярлык для рабочего стола. Настройки (`~/.config/kabegami-kun/`) и сохранённые фото (папка хранения) остаются; удалите их сами, если они больше не нужны.
 
 ### Запуск без установки
 
@@ -212,7 +212,7 @@ cargo run --release
 
 ## Файлы
 
-Папка хранения выбирается в разделе *Настройки → Хранение* (по умолчанию `~/Pictures/BingWallpaper` или локализованная папка «Изображения»). Настройки сохраняются в `~/.config/bing-wallpaper-manager/config.json`, а то, что приложение запоминает (например, размер окна), — в `state.json` в той же папке.
+Папка хранения выбирается в разделе *Настройки → Хранение* (по умолчанию `~/Pictures/kabegami-kun` или локализованная папка «Изображения»). Настройки сохраняются в `~/.config/kabegami-kun/config.json`, а то, что приложение запоминает (например, размер окна), — в `state.json` в той же папке.
 Фото сохраняется только один раз, даже если оно показывается в нескольких регионах или в разные дни, а сохранённые изображения никогда не скачиваются повторно.
 
 ```text
@@ -227,11 +227,11 @@ cargo run --release
 ## Командная строка
 
 ```sh
-bing-wallpaper-manager --apply                       # сделать обоями фото дня
-bing-wallpaper-manager --apply --mkt en-US           # выбрать регион
-bing-wallpaper-manager --apply --if-new              # ничего не делать, если фото то же, что в прошлый раз
-bing-wallpaper-manager --apply --random              # поставить случайное сохранённое фото
-bing-wallpaper-manager --apply --random --favorites  # поставить случайное фото из избранного
+kabegami-kun --apply                       # сделать обоями фото дня
+kabegami-kun --apply --mkt en-US           # выбрать регион
+kabegami-kun --apply --if-new              # ничего не делать, если фото то же, что в прошлый раз
+kabegami-kun --apply --random              # поставить случайное сохранённое фото
+kabegami-kun --apply --random --favorites  # поставить случайное фото из избранного
 ```
 
 Без `--mkt` используется регион, выбранный в разделе *Автообновление* (или первый из показываемых регионов). Если сеть ещё недоступна, например сразу после входа в систему, `--apply` делает несколько повторных попыток, прежде чем сдаться.
@@ -241,8 +241,8 @@ bing-wallpaper-manager --apply --random --favorites  # поставить слу
 Включите переключатель в разделе **Настройки** → **Автообновление** (см. [Автообновление](#автообновление)): он сам настроит пользовательский таймер systemd. Чтобы проверить его работу:
 
 ```sh
-systemctl --user list-timers bing-wallpaper-manager.timer
-journalctl --user -u bing-wallpaper-manager.service
+systemctl --user list-timers kabegami-kun.timer
+journalctl --user -u kabegami-kun.service
 ```
 
 Если в одной из прежних версий вы вручную создали `bing-wallpaper.timer`, отключите его, чтобы не работали оба таймера: `systemctl --user disable --now bing-wallpaper.timer`.
@@ -281,7 +281,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 
 ### Релизные пакеты
 
-`scripts/package-release.sh` собирает релизную версию и создаёт `target/dist/bing-wallpaper-manager-<version>-x86_64-linux.tar.gz` (и его `.sha256`) с исполняемым файлом, значками, ярлыком для рабочего стола и файлами лицензий, включая тексты лицензий всех входящих в сборку библиотек. Версия берётся из `Cargo.toml`.
+`scripts/package-release.sh` собирает релизную версию и создаёт `target/dist/kabegami-kun-<version>-x86_64-linux.tar.gz` (и его `.sha256`) с исполняемым файлом, значками, ярлыком для рабочего стола и файлами лицензий, включая тексты лицензий всех входящих в сборку библиотек. Версия берётся из `Cargo.toml`.
 
 ### Переводы
 
@@ -313,7 +313,7 @@ BG=target/screenshot-fixture/store/20261112_OHR.AbrahamCanada_UHD.jpg FLOAT=1280
 | `locales/*.yml` | Переводы (встраиваются при сборке с помощью rust-i18n) |
 | `src/third_party.tsv` / `THIRD_PARTY_LICENSES.md` | Используемые библиотеки (генерируется скриптом `scripts/gen-third-party.py`) |
 | `assets/icons/` | Значок приложения (SVG и PNG, созданные скриптом `scripts/render-icon.py`) |
-| `assets/bing-wallpaper-manager.desktop` | Ярлык для рабочего стола (устанавливается скриптом `scripts/install.sh`) |
+| `assets/kabegami-kun.desktop` | Ярлык для рабочего стола (устанавливается скриптом `scripts/install.sh`) |
 | `scripts/rustc-stable` | Выбирает стабильный rustc из rustup для cargo (см. «2. Установите Rust») |
 | `scripts/screenshot.sh` | Снимки экрана на виртуальном дисплее |
 | `tools/vpointer/` | Виртуальные мышь и клавиатура для снимков экрана (отдельный крейт) |

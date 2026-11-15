@@ -129,7 +129,7 @@ pub fn display_title(title: &str, copyright: &str) -> String {
 fn agent() -> ureq::Agent {
     ureq::Agent::config_builder()
         .timeout_global(Some(Duration::from_secs(60)))
-        .user_agent("bing-wallpaper-manager/0.2")
+        .user_agent(concat!("kabegami-kun/", env!("CARGO_PKG_VERSION")))
         .build()
         .into()
 }

@@ -1,4 +1,4 @@
-# zh-TW: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# zh-TW: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "使用的程式庫（%{count} 個）"
 about.libraries_note: "點擊即可開啟該程式庫的頁面。清單也收錄在 THIRD_PARTY_LICENSES.md 中。"
@@ -20,7 +20,7 @@ action.search_tooltip: "搜尋（Ctrl+F）"
 action.set_wallpaper: "設為桌布"
 action.settings_tooltip: "設定（Ctrl+,）"
 action.show_in_folder: "在資料夾中顯示"
-app.name: "Bing 桌布"
+app.name: "Kabegami-kun"
 auto.desc: "即使應用程式已關閉，也會自動更換桌布。使用 systemd 使用者計時器。"
 auto.favorites: "從我的最愛選擇"
 auto.favorites_desc: "每次從我的最愛中選一張不同的相片。"
@@ -40,7 +40,7 @@ cli.error: "錯誤"
 cli.no_favorites: "沒有我的最愛相片"
 cli.no_photos: "沒有已儲存的相片"
 cli.retrying: "%{seconds} 秒後重試"
-cli.usage: "用法:\n  bing-wallpaper-manager                                  開啟儀表板\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  將今日相片設為桌布後結束（--if-new：與上次相同則不動作）\n  bing-wallpaper-manager --apply --random [--favorites]   從已儲存的相片（--favorites：我的最愛）中隨機選一張設為桌布"
+cli.usage: "用法:\n  kabegami-kun                                  開啟儀表板\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  將今日相片設為桌布後結束（--if-new：與上次相同則不動作）\n  kabegami-kun --apply --random [--favorites]   從已儲存的相片（--favorites：我的最愛）中隨機選一張設為桌布"
 cli.wallpaper_set: "已設為桌布"
 color.black: "黑"
 color.blue: "藍"

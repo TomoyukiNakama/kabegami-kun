@@ -1,4 +1,4 @@
-# fr: Bing Wallpaper の翻訳。コードからは tr!("キー") で参照する。
+# fr: Kabegami-kun の翻訳。コードからは tr!("キー") で参照する。
 # 差し込みは %{name} の形で書く。キーは全言語でそろえる（tests で確認）。
 about.libraries: "Bibliothèques utilisées (%{count})"
 about.libraries_note: "Cliquez sur une bibliothèque pour ouvrir sa page. La liste figure aussi dans THIRD_PARTY_LICENSES.md."
@@ -20,7 +20,7 @@ action.search_tooltip: "Rechercher (Ctrl+F)"
 action.set_wallpaper: "Définir comme fond d’écran"
 action.settings_tooltip: "Paramètres (Ctrl+,)"
 action.show_in_folder: "Afficher dans le dossier"
-app.name: "Fond d’écran Bing"
+app.name: "Kabegami-kun"
 auto.desc: "Change le fond d’écran automatiquement, même lorsque l’application est fermée. Utilise un minuteur systemd utilisateur."
 auto.favorites: "Parmi les favoris"
 auto.favorites_desc: "Choisit chaque fois un favori différent."
@@ -40,7 +40,7 @@ cli.error: "Erreur"
 cli.no_favorites: "Aucune photo favorite"
 cli.no_photos: "Aucune photo enregistrée"
 cli.retrying: "Nouvel essai dans %{seconds} secondes"
-cli.usage: "Utilisation :\n  bing-wallpaper-manager                                  Ouvrir le tableau de bord\n  bing-wallpaper-manager --apply [--mkt ja-JP] [--if-new]  Appliquer la photo du jour comme fond d’écran et quitter (--if-new : ne rien faire si c’est la même photo que la dernière fois)\n  bing-wallpaper-manager --apply --random [--favorites]   Appliquer au hasard une photo enregistrée (--favorites : un favori) comme fond d’écran"
+cli.usage: "Utilisation :\n  kabegami-kun                                  Ouvrir le tableau de bord\n  kabegami-kun --apply [--mkt ja-JP] [--if-new]  Appliquer la photo du jour comme fond d’écran et quitter (--if-new : ne rien faire si c’est la même photo que la dernière fois)\n  kabegami-kun --apply --random [--favorites]   Appliquer au hasard une photo enregistrée (--favorites : un favori) comme fond d’écran"
 cli.wallpaper_set: "Fond d’écran défini"
 color.black: "Noir"
 color.blue: "Bleu"

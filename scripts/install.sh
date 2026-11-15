@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # アプリ・アイコン・デスクトップ項目をユーザーの領域（既定 ~/.local）に入れる。
-# GNOME のアプリ一覧に「Bing 壁紙」が出るようになり、ウィンドウにもアイコンが付く。
+# GNOME のアプリ一覧に「Kabegami-kun」が出るようになり、ウィンドウにもアイコンが付く。
 # 毎回 cargo build --release してから入れるので、git pull のあとに実行すれば更新になる。
 #
 # 使い方: scripts/install.sh            # ~/.local に入れる
@@ -10,7 +10,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 PREFIX=${PREFIX:-$HOME/.local}
-APP=bing-wallpaper-manager
+APP=kabegami-kun
 
 if [[ ${1:-} == --uninstall ]]; then
     rm -f "$PREFIX/bin/$APP" "$PREFIX/share/applications/$APP.desktop" \

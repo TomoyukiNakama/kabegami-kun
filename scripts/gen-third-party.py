@@ -103,7 +103,7 @@ def write_texts(out: Path, packages: list) -> None:
     """各クレートのライセンスファイルの本文を 1 つのテキストにまとめる。"""
     packages = sorted(packages, key=lambda p: (p["name"].lower(), p["version"]))
     parts = [
-        "Third-party license texts for Bing Wallpaper Manager",
+        "Third-party license texts for Kabegami-kun",
         "=" * 52,
         "",
         "This file contains the license files shipped with each Rust crate compiled into this program.",
