@@ -122,6 +122,8 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
 
 - 定義は `snap/snapcraft.yaml`（strict、GNOME 拡張、core24）。ビルドは LXD の中で行う。
   `target/` が数十 GB あり丸ごと写されるので、`git clone` した別のフォルダで `snapcraft pack` する（コミット済みのファイルだけが入る）。
+- 同じフォルダで作り直すときは、先に `snapcraft clean app` する。しないと snapcraft が「ビルド済み」と判断して、古いアプリのまま snap を作る
+  （作ったら `unsquashfs` で取り出して、新しいコードが入っているかを確かめる）。
 - GNOME 拡張が LD_LIBRARY_PATH に SDK のライブラリを入れ、rustup と rustc が起動できなくなる（snapcraft の rust プラグインも
   「rustup が無い」と誤って判断する）。そのため `plugin: nil` で、cargo の部分だけ LD_LIBRARY_PATH を外したサブシェルで実行している。
 - snap 版の設定は `~/snap/kabegami-kun/current/.config/kabegami-kun/` に置かれる（以前の設定は引き継がない）。
