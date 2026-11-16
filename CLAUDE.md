@@ -2,6 +2,11 @@
 
 Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日替わり写真を壁紙にする。旧名 bing-wallpaper-manager）。Rust + gpui-kit。UI・メッセージは日本語。
 
+## 応答の言語
+
+- ユーザーへの応答は日本語で書く（ユーザーが英語で書いても日本語で返す）。
+- コミットメッセージとコード中のコメントも、これまでどおり日本語で書く。英語にするのは、英語版の README、GitHub のリリースノート（日本語の説明も付ける）、Snap Store の説明など、英語が元のものだけ。
+
 ## ビルド環境（必ず守る）
 
 - ユーザーは **rustup の `cargo`（`~/.cargo/bin/cargo`、stable）** で `cargo run` する。
@@ -19,8 +24,9 @@ Ubuntu 26.04（GNOME）向けの壁紙アプリ「Kabegami-kun」（Bing の日�
   - `cargo-1.93` は `RUSTC` 環境変数で rustc 1.93 を指定するため `.cargo/config.toml` の設定より優先され、ビルドできない。使わない。
 - 確認には **ユーザーと同じ cargo（rustup の cargo）を使う**。シェル設定に左右されないよう、PATH を明示して実行する。
   ```sh
-  env -i HOME=$HOME PATH=$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/bin bash -c 'cd /mnt/ssd2/git/bing-wallpaper-manager && cargo build && cargo test'
+  env -i HOME=$HOME PATH=$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/bin bash -c 'cargo build && cargo test'
   ```
+  （リポジトリの直下で実行する。作業フォルダの絶対パスはここに書かない）
   （cargo の種類が変わるとキャッシュが合わず全体を再ビルドするので、普段からこの cargo に揃える）
   以下の `cargo build --release` や `timeout 12 cargo run` も同じ PATH で実行する。
 - 依存の追加・更新をしたら、上のコマンドでビルドが通ることを必ず確認する。
